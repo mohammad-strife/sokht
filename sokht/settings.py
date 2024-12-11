@@ -123,7 +123,7 @@ STATICFILES_DIRS = [
     BASE_DIR / "static",
     # "/var/www/static/",
 ]
-STATIC_ROOT = '/home/saeidkhan/sokht/staticfiles'
+STATIC_ROOT = '/home/mohammad24/sokht/staticfiles'
 
 
 # Default primary key field type
