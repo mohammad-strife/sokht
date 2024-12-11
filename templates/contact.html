@@ -1,0 +1,199 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>درباره ما</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+    {% load static %}
+    <link rel="icon" type="image/png" href="{% static 'images/fav2.png' %}">
+</head>
+<body>
+{% include 'header.html' %}
+
+<style>
+    body {
+        font-family: 'MyFont', sans-serif;
+
+    }
+
+    @font-face {
+        font-family: 'MyFont';
+        src: url('/static/font/Shabnam-Medium.woff') format('woff');
+    }
+
+
+    .card {
+        position: relative;
+        display: flex;
+        flex-direction: column;
+        min-width: 0;
+        word-wrap: break-word;
+        background-color: #fff;
+        background-clip: border-box;
+        border: 1px solid #d2d2dc;
+        border-radius: 11px;
+        -webkit-box-shadow: 0px 0px 5px 0px rgb(249, 249, 250);
+        -moz-box-shadow: 0px 0px 5px 0px rgba(212, 182, 212, 1);
+        box-shadow: 0px 0px 5px 0px rgb(161, 163, 164)
+    }
+
+    .card .card-body {
+        padding: 1rem 1rem
+    }
+
+    .card-body {
+        flex: 1 1 auto;
+        padding: 1.25rem
+    }
+
+    p {
+        font-size: 14px;
+    }
+
+    h4 {
+        margin-top: 18px;
+    }
+
+
+    .btn:focus {
+        outline: none
+    }
+
+    .btn {
+        border-radius: 22px;
+        text-transform: capitalize;
+        font-size: 13px;
+        padding: 8px 19px;
+        cursor: pointer;
+        color: #fff;
+        background-color: blue;
+
+    }
+
+
+    .btn:hover {
+
+        background-color: #D32F2F !important;
+    }
+</style>
+<div id="carouselExampleCaptions" class="carousel slide d-none d-md-block" style="margin-top: -130px">
+    <div class="carousel-inner ">
+        <div class="carousel-item active">
+            {% load static %}
+            <img src="{% static 'images/connnnnn.jpg' %}" class="w-100 h-10"
+                 style="height: 700px;object-fit: cover;border-bottom-right-radius: 20%;border-bottom-left-radius: 20%"
+                 alt="My image">
+            <div class="carousel-caption ">
+                <div class="container">
+                    <div class="row d-flex justify-content-center">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div id="carouselExampleCaptions" class="carousel slide d-md-none" style="margin-top: -130px">
+    <div class="carousel-inner ">
+        <div class="carousel-item active">
+            {% load static %}
+            <img src="{% static 'images/connnnnn.jpg' %}" class="w-100 h-10"
+                 style="height: 500px;object-fit: cover;"
+                 alt="My image">
+            <div class="carousel-caption ">
+                <div class="container">
+                    <div class="row d-flex justify-content-center">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<div class="container mt-5">
+    <div class="text">
+        <h3 class="text-right">میتونیم کمکتون کنیم</h3>
+        <p class="text-right">سرویس بنزین یار بنزین آنلاین، راهی آسان و سریع برای تأمین سوخت مورد نیاز شماست. با استفاده
+            از این پلتفرم، کاربران می‌توانند تنها با چند کلیک ساده، بنزین را به صورت آنلاین سفارش دهند و در محل مورد نظر
+            خود دریافت کنند.
+            راحتی و سرعت: دیگر نیازی نیست در صف‌های طولانی پمپ بنزین بایستید. تنها با ثبت سفارش، بنزین شما در زمان مشخص
+            به دستتان می‌رسد.
+
+            قیمت‌های شفاف: با مشاهده قیمت‌های روز و مقایسه آن‌ها، می‌توانید بهترین گزینه را انتخاب کنید.
+
+            سرویس در محل: بنزین به آدرس دلخواه شما ارسال می‌شود، چه در خانه باشید و چه در محل کار.
+
+            سفارش آسان: با یک رابط کاربری ساده، ثبت سفارش تنها چند دقیقه زمان می‌برد.
+
+
+        </p>
+    </div>
+</div>
+
+<div class="container text-center">
+    <div class="row">
+        <div class="col-12 col-md-4 mx-auto mt-5">
+            <div class="card">
+                <div class="card-body text-center">
+
+
+                    <div style="font-size:55px"><i class="fas fa-envelope"></i></div>
+                    <h4>ایمیل</h4>
+                    <p>شما میتوانید با ارسال ایمیل نظرات انتقادات یا پیشنهادات خودتون رو بهمون بگید</p>
+                    <p>benzin_online@gmail.com</p>
+
+
+                    <button class="btn btn-out btn-square"> ایمیل کنید</button>
+
+
+                </div>
+            </div>
+        </div>
+        <div class="col-md-4 col-12 mx-auto mt-5">
+            <div class="card mx-auto">
+                <div class="card-body text-center">
+
+
+                    <div style="font-size:55px"><i class="fas fa-phone-volume"></i></div>
+                    <h4>تماس تلفنی</h4>
+                    <p>شما با برقرار کردن تماس تلفنی با ما میتوانید هر مشکل یا سوالی دارید رو با ما در میون بزارید </p>
+                    <p>+989036080000</p>
+
+                    <button class="btn btn-out btn-square"> برقراری تماس</button>
+
+
+                </div>
+            </div>
+        </div>
+        <div class="col-md-4 col-12 mx-auto mt-5">
+            <div class="card">
+                <div class="card-body text-center">
+
+
+                    <div style="font-size:55px"><i class="fas fa-map-marker-alt"></i></div>
+                    <h4>موقعیت مکانی</h4>
+                    <p>شما میتوانید با بازدید از محل سوختگیری به تمام اتفاقات واقف باشد </p>
+                    <p>ادرس:قم پمپ بنزین شهدای ناجا</p>
+
+                    <button class="btn btn-out btn-square"> CONTACT NOW</button>
+
+
+                </div>
+            </div>
+        </div>
+
+    </div>
+</div>
+
+{% include 'footer.html' %}
+<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/js/all.min.js"></script>
+<script src="/fonts/all.js"></script>
+
+</body>
+</html>

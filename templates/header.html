@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="fa">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+
+    <style>
+        #sidebarMenu {
+            position: fixed;
+            top: 0;
+            right: 0;
+            width: 250px;
+            height: 100%;
+            background-color: rgba(93, 129, 166, 0.24); /* رنگ پس‌زمینه نیمه شفاف */
+            color: white;
+            padding-top: 20px;
+            z-index: 1040; /* Bootstrap navbar z-index is 1030 */
+            transform: translateX(100%);
+            transition: transform 0.3s ease;
+            backdrop-filter: blur(10px); /* بلور کردن پس‌زمینه */
+        }
+
+        #sidebarMenu.show {
+            transform: translateX(0);
+        }
+
+        #sidebarMenu .nav-link {
+            color: white;
+        }
+
+        .close-btn {
+            position: absolute;
+            top: 10px;
+            left: 10px;
+            font-size: 1.5rem;
+            cursor: pointer;
+        }
+
+        .navbar-nav {
+            padding: 0;
+        }
+
+        .nav-item {
+            list-style: none;
+        }
+
+        .nav-link {
+            display: block;
+            padding: 10px 0;
+            text-decoration: none;
+        }
+    </style>
+    <script>
+        function toggleSidebar() {
+            document.getElementById('sidebarMenu').classList.toggle('show');
+        }
+    </script>
+</head>
+<body>
+<div class="container">
+    <nav class="navbar navbar-expand-lg navbar-light" style="z-index: 99;">
+        <a class="navbar-brand" href="http://localhost:8000/">
+            {% load static %}
+            <img src="{% static 'images/Screenshot (3)_prev_ui.png' %}" style="height:70px;width: 120px;"
+                 alt="My image">
+        </a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarToggleExternalContent"
+                aria-controls="navbarToggleExternalContent" aria-expanded="false" aria-label="Toggle navigation"
+                onclick="toggleSidebar()">
+            <span class="navbar-toggler-icon" id="menu-toggle"></span>
+        </button>
+        <div class="d-md-none d-none collapse navbar-collapse justify-content-end" id="navbarToggleExternalContent">
+            <ul class="navbar-nav">
+                <li class="nav-item">
+                    {% if user.is_authenticated %}
+                        <a class="nav-link" href="{% url 'client:logout' %}" style="color: white">خروج از حساب</a>
+                    {% else %}
+                        <a class="nav-link" href="http://localhost:8000/auth/" style="color: white">ثبت نام</a>
+                    {% endif %}
+                </li>
+
+                <li class="nav-item">
+                    <a class="nav-link" href="http://localhost:8000/contact/" style="color: white">ارتباط با ما</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="http://localhost:8000/order/" style="color: white">سفارشات</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="http://localhost:8000/pay/" style="color: white">خرید محصول</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="http://localhost:8000/" style="color: white">صفحه اصلی</a>
+                </li>
+            </ul>
+        </div>
+    </nav>
+
+    <div id="sidebarMenu">
+        <span class="close-btn text-white" onclick="toggleSidebar()">&times;</span>
+        <ul class="navbar-nav">
+            <li class="nav-item">
+                <a class="nav-link text-center " href="http://localhost:8000/" style="color: white">صفحه اصلی</a>
+            </li>
+
+            <li class="nav-item">
+                <a class="nav-link text-center" href="http://localhost:8000/pay/" style="color: white">خرید محصول</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link text-center" href="http://localhost:8000/order/" style="color: white">سفارشات</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link text-center" href="http://localhost:8000/contact/" style="color: white">ارتباط با
+                    ما</a>
+            </li>
+            <li class="nav-item">
+                {% if user.is_authenticated %}
+                    <a class="nav-link text-center" href="{% url 'client:logout' %}" style="color: white">خروج از
+                        حساب</a>
+                {% else %}
+                    <a class="nav-link text-center" href="http://localhost:8000/auth/" style="color: white">ثبت نام</a>
+                {% endif %}
+            </li>
+        </ul>
+    </div>
+</div>
+</body>
+</html>

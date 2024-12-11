@@ -1,0 +1,632 @@
+<!DOCTYPE html>
+<html lang="fa">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <title>فیولیت</title>
+    <!-- Bootstrap CSS -->
+    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+
+    {% load static %}
+    <link rel="icon" type="image/png" href="{% static 'images/fav2.png' %}">
+
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+    <style>
+
+    </style>
+</head>
+<body>
+
+{% include 'header.html' %}
+
+<div id="carouselExampleCaptions" class="carousel slide d-none d-md-block" style="margin-top: -130px">
+    <div class="carousel-inner d-none d-md-block">
+        <div class="carousel-item active">
+            {% load static %}
+            <img src="{% static 'images/descktop&mobile.png' %}" class="w-100 h-10"
+                 style="height: 700px;object-fit: cover;border-bottom-right-radius: 20%;border-bottom-left-radius: 20%"
+                 alt="My image">
+            <div class="carousel-caption d-none d-md-block"
+                 style="position: absolute; top: 55%; right: 10%; transform: translateY(-50%);">
+                <div class="container text-right">
+                    <h2>فیولیت، ثبت سفارش آنلاین بنزین</h2>
+                    <p>راحتی و سرعت در تحویل را برای شما به ارمغان می‌آورد</p>
+                    <div class="row d-flex justify-content-center">
+                        <div class="col-md-9">
+                            <a href="https://fuelit.ir/pay/" class="button-link">
+                                <button class="button" style="border: none">درخواست آنلاین سوخت</button>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<div class="container d-none d-md-block">
+    <div class="row d-flex justify-content-center">
+        <div class="col-md-12" style="margin-top: -130px">
+            <div class="card p-2 mt-2">
+                <h3 class="heading mt-5 text-center">فیولیت</h3>
+                <p class="text-center">تنها مرجع سوخت رسانی انلاین شهر قم</p>
+                <div class="row mt-4 g-1 px-4 mb-5">
+                    <div class="col-md-2 mx-auto">
+                        <a href="https://fuelit.ir/">
+                            <div class="card-inner p-3 d-flex flex-column align-items-center"
+                                 style="background-color: blue;border-radius: 25px">
+                                <i class="fas fa-gas-pump" aria-hidden="true"
+                                   style="color: #ffffff;font-size: 30px;"></i>
+                                <div class="text-center mg-text mt-3">
+                                    <span class="mg-text text-light">خانه</span>
+                                </div>
+                            </div>
+                        </a>
+                    </div>
+
+
+                    <div class="col-md-2 mx-auto">
+                        <div id="productButton" class="card-inner p-3 d-flex flex-column align-items-center"
+                             style="border-radius: 25px">
+                            <i class="fas fa-shopping-cart" style="color: #0000ff;font-size: 30px"></i>
+                            <div class="text-center mg-text mt-3"><span class="mg-text">محصولات</span></div>
+                        </div>
+                    </div>
+
+
+                    <div class="col-md-2 mx-auto">
+                        <a href="https://fuelit.ir/pay/">
+                            <div class="card-inner p-3 d-flex flex-column align-items-center"
+                                 style="border-radius: 25px">
+                                <i class="fas fa-store" style="color: blue;font-size: 30px"></i>
+                                <div class="text-center text-dark mg-text mt-3"><span class="mg-text">فروشگاه</span>
+                                </div>
+
+                            </div>
+                        </a>
+                    </div>
+                    <div class="col-md-2 mx-auto">
+                        <a href="https://fuelit.ir/order/">
+                            <div class="card-inner p-3 d-flex flex-column align-items-center"
+                                 style="border-radius: 25px">
+                                <i class="fas fa-receipt" style="color: blue;font-size: 30px"></i>
+                                <div class="text-center text-dark mg-text mt-3"><span
+                                        class="mg-text">تاریخچه سفارشات</span>
+                                </div>
+                            </div>
+                        </a>
+                    </div>
+                    <div class="col-md-2 mx-auto">
+                        <a href="https://fuelit.ir/contact/">
+                            <div class="card-inner p-3 d-flex flex-column align-items-center"
+                                 style="border-radius: 25px">
+                                <i class="fas fa-phone-volume" style="color: blue;font-size: 30px"></i>
+                                <div class="text-center text-dark mg-text mt-3"><span
+                                        class="mg-text">ارتباط با ما</span></div>
+
+                            </div>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<div class="container mt-5 p-5 d-none d-md-block ">
+    <div class="row">
+        <div class="col-md-4">
+            {% load static %}
+            <img src="{% static  " images/nemodar.png" %}" alt="">
+        </div>
+        <div class="col-md-6 text-right mt-5 pt-4" style="margin-left: 150px;font-size: 19px;">
+            <span> <strong style="color:blueviolet "> آیا می دانستید </strong>مردم امروزه بخش قابل توجهی از وقت خود را در صف‌های پمپ بنزین می‌گذرانند و در این میان، <span
+                    style="color: #ec0d0d;font-size: 25px">خطرات</span> بهداشتی ناشی از کثیفی و میکروب‌های موجود در این مکان‌ها نیز تهدیدی جدی به شمار می‌آید </span>
+            <br>
+            <br>
+            <p>چارت روبرو نشان دهنده میانگین <strong>زمان صرف شده هر فرد در طول یک هفته</strong> در صف سوختگیری است
+                (اعداد به دقیقه هستند)</p>
+        </div>
+
+    </div>
+</div>
+
+
+<div class=" mt-5 p-5 container  text-center">
+    <h1>محصولات ما</h1>
+</div>
+<section id="products" class=" d-none d-md-block sec">
+    <div class="area">
+        <ul class="circles">
+            <li></li>
+            <li></li>
+            <li></li>
+            <li></li>
+            <li></li>
+            <li></li>
+            <li></li>
+            <li></li>
+            <li></li>
+            <li></li>
+        </ul>
+        <div class="container" id="productButton">
+            <div class="row pt-5 m-auto">
+                {% for product in products %}
+                <div class="col-md-12 col-lg-4 pb-3">
+                    <div class="card card-custom bg-white border-white border-0">
+                        <div class="card-custom-img"
+                             style="background-image: url(http://res.cloudinary.com/d3/image/upload/c_scale,q_auto:good,w_1110/trianglify-v1-cs85g_cc5d2i.jpg);"></div>
+                        <div class="card-custom-avatar">
+                            {% if product.name == "بنزین معمولی" %}
+                            <img src="{% static 'images/mamoli.jpg' %}"
+                                 alt="mamoli" style="object-fit: cover">
+                            {% elif product.name == "بنزین سوپر" %}
+                            <img src="{% static 'images/super.jpg' %}"
+                                 alt="mamoli" style="object-fit: cover">
+                            {% elif product.name == "بنزین یورو 6" %}
+                            <img src="{% static 'images/euro4.jpg' %}"
+                                 alt="mamoli" style="object-fit: cover">
+                            {% endif %}
+
+                        </div>
+                        <div class="card-body text-right" style="overflow-y: auto">
+                            <h4 class="card-title">{{ product.name }}</h4>
+                            {% if product.name == "بنزین سوپر" %}
+                            <p class="card-text">بنزین سوپر با عدد اکتان بالاتر، باعث افزایش قدرت موتور و بهبود
+                                عملکرد خودرو می‌شود. همچنین، مصرف بنزین سوپر منجر به کاهش رسوبات در محفظه احتراق
+                                و
+                                طولانی‌تر شدن عمر موتور می‌گردد
+                            </p>
+                            {% elif product.name == "بنزین معمولی" %}
+                            <p> بنزین معمولی با عدد اکتان پایینتر و سوخت مناسب میتواند قدرت خوبی به موتور بدهد
+                                تا شتاب مناسب داشته باشد و بعد از گاز مایع ئر قدرت ترین نوع سوخت میباشد و با این
+                                حال پرطرفدار ترین سوخت موتوری دنیا است</p>
+                            {% elif product.name == "بنزین یورو 6" %}
+                            <p>یورو 6 یکی از سوخت های تجدید پذیر و محرک عالی برای خودرو ها است از انجا که سوخت
+                                بسار سبکی طلقی میشود ولی قدرت خوبی دارد و الودگی بسار کمی ایجاد میکند و برای
+                                محیط زیست اسیب کمتری دارد</p>
+                            {% endif %}
+
+                            <span class="card-text">قیمت هر لیتر{% if product.price == 7400 %}
+                                    7 هزار 400 تومان {% elif product.price == 10000 %} 10 هزار تومان  {% else %}3 هزار
+                                    500 تومان{% endif %}  </span>
+                        </div>
+                        <div class="card-footer"
+                             style="background: inherit; border-color: inherit; border-radius: 20px;">
+                            <a href="https://fuelit.ir/pay/{{ product.product_id }}/" class="btn btn-primary">ثبت
+                                سفارش</a>
+                        </div>
+                    </div>
+                    <!-- Copy until here -->
+                </div>
+                {% endfor %}
+            </div>
+        </div>
+    </div>
+</section>
+
+
+<div class="container mt-5 p-5 d-none d-md-block ">
+    <div class="text-center p-2"><p style="font-size: 30px">قابل توجه همشهریان گرامی</p></div>
+    <div class="row mt-5">
+        <div class="col-md-6">
+            {% load static %}
+            <img src="{% static  " images/Chart Title.png" %}" alt="">
+        </div>
+        <div class="col-md-4 text-right mt-5 pt-5" style="margin-left: 150px;font-size: 19px;">
+            <p>چارت روبرو نشان دهنده <strong>تراکم جمعیت در مراکز سوختگیری شهر قم </strong> میباشد,با انتخاب درست در
+                زمان خودت صرفه جویی کن</p>
+        </div>
+
+    </div>
+</div>
+<section>
+    <div class=" mt-5 d-none d-md-block">
+        <img src="{% static 'images/sahm.jpg' %}"
+             alt="My image" class=" banner col-md-12 object-fit-cover" style="padding-right: 0;padding-left: 0">
+
+
+    </div>
+</section>
+
+
+<div id="carouselExampleCaptions" class="carousel slide d-md-none" style="margin-top: -300px">
+    <div class="carousel-inner">
+        <div class="carousel-item active">
+            {% load static %}
+            <img src="{% static 'images/home2.jpeg' %}" class="w-100" style="height: 500px;object-fit: cover"
+                 alt="My image">
+            <div class="carousel-caption">
+                <h3 class="text-right" style="margin-left: 130px">فیولیت، وبسایت ثبت سفارش آنلاین بنزین</h3>
+                <p class="text-right">راحتی و سرعت در تحویل را برای شما به ارمغان می‌آورد</p>
+                <a href="https://fuelit.ir/pay/">
+                    <div class="button mx-auto mt-3">درخواست انلاین سوخت</div>
+                </a>
+
+            </div>
+        </div>
+    </div>
+</div>
+<div class=" d-md-none  p-5 container  text-center">
+    <h4>فیولیت</h4>
+    <p>تنها مرجع سوخت رسانی انلاین شهر قم</p>
+</div>
+
+<div class="container text-center  d-md-none">
+    <div class="row">
+        <div class="col-4" style=" border-bottom-width: 100px; bottom: 05px;">
+            <a href="https://fuelit.ir/">
+                <div class="" style="background-color: blue;border-radius: 25px;">
+                    <div>
+                        <i class="fas fa-gas-pump" aria-hidden="true"
+                           style="color: #ffffff;font-size: 30px;margin-top: 3px"></i>
+                    </div>
+
+                    <p style="color: white">خانه</p>
+
+                </div>
+            </a>
+        </div>
+
+        <div id="productButton" onclick="scrollToTarget()" class="col-4">
+            <a href="#"></a>
+            <i class="fas fa-shopping-cart" style="color: blue; font-size: 30px"></i>
+            <p>محصولات</p>
+        </div>
+
+
+        <div class="col-4">
+            <a href="https://fuelit.ir/pay/">
+                <i class="fas fa-store" style="color: blue;font-size: 30px"></i>
+                <p style="color: black">فروشگاه</p>
+            </a>
+
+        </div>
+        <div class="row mx-auto p-3" style="justify-content: space-between">
+            <div class="col-5 d-flex align-items-center justify-content-center" style="margin-right: 15px;">
+                <a href="https://fuelit.ir/order/" style="text-decoration: none;">
+                    <i class="fas fa-receipt" style="color: blue; font-size: 30px"></i>
+                    <p style="color: black; margin: 0;">سفارشات</p>
+                </a>
+            </div>
+            <div class="col-5 d-flex align-items-center justify-content-center" style="margin-left: 15px;">
+                <a href="https://fuelit.ir/contact/" style="text-decoration: none;">
+                    <i class="fas fa-phone-volume" style="color: blue; font-size: 30px"></i>
+                    <p style="color: black; margin: 0; white-space: nowrap;">ارتباط با ما</p>
+                </a>
+            </div>
+        </div>
+
+
+    </div>
+</div>
+<div class="container mt-3 p-5 d-md-none ">
+    <div class="row">
+        <div class="col-12 text-right">
+            <span> <strong style="color:blueviolet "> آیا می دانستید </strong>مردم امروزه بخش قابل توجهی از وقت خود را در صف‌های پمپ بنزین می‌گذرانند و در این میان، <span
+                    style="color: #ec0d0d;font-size: 25px">خطرات</span> بهداشتی ناشی از کثیفی و میکروب‌های موجود در این مکان‌ها نیز تهدیدی جدی به شمار می‌آید </span>
+            <br>
+            <br>
+            <p>چارت روبرو نشان دهنده میانگین <strong>زمان صرف شده هر فرد در طول یک هفته</strong> در صف سوختگیری است
+                (اعداد به دقیقه هستند)</p>
+        </div>
+        <div class="mx-auto">
+            {% load static %}
+            <img class="col-12" src="{% static  " images/nemodar.png" %}" alt="">
+        </div>
+
+    </div>
+</div>
+
+
+<div id="targetDiv" class=" d-md-none   container  text-center">
+    <h1>محصولات ما</h1>
+</div>
+
+{#jdsjfjfd#}
+
+<section class="mt-4 d-md-none"
+         style="background: linear-gradient(90deg, rgba(2,0,36,1) 0%, rgba(9,9,121,1) 0%, rgba(0,212,255,1) 100%); ">
+    <div class="container">
+        <div class="row pt-5 m-auto">
+            <div class="col-md-12 col-lg-4 pb-3">
+                <div id="carouselExampleControls" class="carousel slide" data-ride="carousel">
+                    <div class="carousel-inner">
+                        {% for product in products %}
+                        <div class="carousel-item {% if product.product_id == 1 %} active {% else %} {% endif %} ">
+                            <div class="card card-custom bg-white border-white border-0">
+                                <div class="card-custom-img"
+                                     style="background-image: url(http://res.cloudinary.com/d3/image/upload/c_scale,q_auto:good,w_1110/trianglify-v1-cs85g_cc5d2i.jpg);"></div>
+                                <div class="card-custom-avatar">
+                                    {% if product.name == "بنزین معمولی" %}
+                                    <img src="{% static 'images/mamoli.jpg' %}"
+                                         alt="mamoli" style="object-fit: cover">
+                                    {% elif product.name == "بنزین سوپر" %}
+                                    <img src="{% static 'images/super.jpg' %}"
+                                         alt="mamoli" style="object-fit: cover">
+                                    {% elif product.name == "بنزین یورو 6" %}
+                                    <img src="{% static 'images/euro4.jpg' %}"
+                                         alt="mamoli" style="object-fit: cover">
+                                    {% endif %}
+
+                                </div>
+                                <div class="card-body text-right" style="overflow-y: auto">
+                                    <h4 class="card-title">{{ product.name }}</h4>
+                                    {% if product.name == "بنزین سوپر" %}
+                                    <p class="card-text">بنزین سوپر با عدد اکتان بالاتر، باعث افزایش قدرت موتور
+                                        و بهبود
+                                        عملکرد خودرو می‌شود. همچنین، مصرف بنزین سوپر منجر به کاهش رسوبات در
+                                        محفظه احتراق
+                                        و
+                                        طولانی‌تر شدن عمر موتور می‌گرددو...
+                                    </p>
+                                    {% elif product.name == "بنزین معمولی" %}
+                                    <p> بنزین معمولی با عدد اکتان پایینتر و سوخت مناسب میتواند قدرت خوبی به
+                                        موتور بدهد
+                                        تا شتاب مناسب داشته باشد و بعد از گاز مایع ئر قدرت ترین نوع سوخت میباشد
+                                        و با این
+                                        حال پرطرفدار ترین سوخت موتوری دنیا است</p>
+                                    {% elif product.name == "بنزین یورو 6" %}
+                                    <p>یورو 6 یکی از سوخت های تجدید پذیر و محرک عالی برای خودرو ها است از انجا
+                                        که سوخت
+                                        بسار سبکی طلقی میشود ولی قدرت خوبی دارد و الودگی بسار کمی ایجاد میکند و
+                                        برای
+                                        محیط زیست اسیب کمتری دارد</p>
+                                    {% endif %}
+
+                                    <span class="card-text">قیمت هر لیتر{% if product.price == 7400 %}
+                                            7 هزار 400 تومان {% elif product.price == 10000 %} 10 هزار تومان  {% else %}
+                                            3 هزار
+                                            500 تومان{% endif %}  </span>
+                                </div>
+                                <div class="card-footer"
+                                     style="background: inherit; border-color: inherit; border-radius: 20px;">
+                                    <a href="https://fuelit.ir/pay/{{ product.product_id }}/"
+                                       class="btn btn-primary">ثبت
+                                        سفارش</a>
+                                </div>
+                            </div>
+                        </div>
+
+                        {% endfor %}
+                    </div>
+                    <style>
+                        .carousel-control-prev-icon, .carousel-control-next-icon {
+                            width: 20px;
+                            height: 20px;
+                            background-color: black;
+                        }
+                    </style>
+                    <!-- Moving the controls inside the carousel div -->
+                    <a class="carousel-control-prev" href="#carouselExampleControls" role="button" data-slide="prev">
+                        <span class="carousel-control-prev-icon" style="background-color: black"
+                              aria-hidden="true"></span>
+                    </a>
+                    <a class="carousel-control-next" href="#carouselExampleControls" role="button" data-slide="next">
+                        <span class="carousel-control-next-icon" style="background-color: black;"
+                              aria-hidden="true"></span>
+                        <span class="sr-only">Next</span>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<div class="container mt-2 p-5  d-md-none ">
+    <div class="text-center p-2"><p style="font-size: 30px">قابل توجه همشهریان گرامی</p></div>
+    <div class="row">
+        <div class="col-12 text-right pt-5">
+            <p>چارت روبرو نشان دهنده <strong>تراکم جمعیت در مراکز سوختگیری شهر قم </strong> میباشد,با انتخاب درست در
+                زمان خودت صرفه جویی کن</p>
+        </div>
+        <div>
+            {% load static %}
+            <img class="col-12" src="{% static  " images/Chart Title.png" %}" alt="">
+        </div>
+
+    </div>
+</div>
+
+
+<div class="text-center mx-auto w-100 mt-5 d-md-none">
+    <img src="{% static 'images/sahm.jpg' %}"
+         alt="My image" style="object-fit: cover;height: 150px;padding-right: 0;padding-left: 0" class="col-12">
+</div>
+
+{#footer#}
+<div style="margin-top: 100px">
+    <footer class="footer-20192">
+        <div class="site-section">
+            <div class="container">
+
+                <div class="cta d-block d-md-flex align-items-center px-5">
+                    <div>
+                        <h2 class="mb-0">ready for next project?</h2>
+                        <h3 class="text-dark">We are very proud to share your opinions with us and interact with each
+                            other</h3>
+                    </div>
+                    <div class="text-right ml-5">
+                        <a href="https://t.me/saeii1d" class="btn btn-dark rounded-0 py-3 px-5">contact us</a>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-3 col-6 text-center">
+                        <h3>باما در ارتباط باشید</h3>
+                        <ul class="list-unstyled social">
+                            <li><a href="https://fuelit.ir/contact/"><i class="fas fa-envelope"
+                                                                        style="padding:10px;font-size: 40px;width: 1em"></i></a>
+                            </li>
+                            <li><a href="https://fuelit.ir/contact/"><i class="fas fa-phone-volume"
+                                                                        style="padding:6px;font-size: 40px;width: 1em"></i></a>
+                            </li>
+                            <li><a href="https://fuelit.ir/contact/"><i class="fas fa-map-marker-alt"
+                                                                        style="padding:6px;font-size: 40px;width: 1em"></i></a>
+                            </li>
+
+                        </ul>
+                    </div>
+
+                    <div class="col-6 col-md-3 text-center">
+                        <h3>شرکت ما</h3>
+                        <ul class="list-unstyled links">
+                            <li><a href="https://fuelit.ir/contact/">درباره ما</a></li>
+                            <li><a href="https://fuelit.ir/contact/">تماس با ما</a></li>
+                        </ul>
+                    </div>
+                    <div class="col-6 col-md-3 text-center">
+                        <h3>خدمات ما</h3>
+                        <ul class="list-unstyled links">
+                            <li><a href="https://fuelit.ir/">بنزین رسانی آنلاین</a></li>
+                        </ul>
+                    </div>
+                    <div class="col-6 col-md-3 text-center">
+                        <h3>محصولات ما</h3>
+                        <ul class="list-unstyled links">
+                            <li><a href="https://fuelit.ir/pay/">بنزین یورو۴</a></li>
+                            <li><a href="https://fuelit.ir/pay/">بنزین معمولی</a></li>
+                            <li><a href="https://fuelit.ir/pay/">بنزین سوپر</a></li>
+
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </footer>
+</div>
+<style>
+
+    a {
+        -webkit-transition: .3s all ease;
+        -o-transition: .3s all ease;
+        transition: .3s all ease;
+    }
+
+    a, a:hover {
+        text-decoration: none !important;
+    }
+
+    .content {
+        height: 70vh;
+    }
+
+    .footer-20192 {
+        position: relative;
+        color: #fff;
+        padding: 7rem 0;
+        background-color: #141d2a;
+    }
+
+    .footer-20192 .container {
+        position: relative;
+    }
+
+    .footer-20192 h3 {
+        font-size: 16px;
+        margin-bottom: 10px;
+        margin-top: 0;
+        line-height: 1.5;
+    }
+
+    .footer-20192 .links li {
+        margin-bottom: 10px;
+        line-height: 1.5;
+        display: block;
+    }
+
+    .footer-20192 .links li a {
+        color: #666873;
+    }
+
+    .footer-20192 .links li a:hover {
+        color: #fff;
+    }
+
+    .footer-20192 .social li {
+        display: inline-block;
+        position: relative;
+    }
+
+    .footer-20192 .social li a {
+        position: relative;
+        width: 40px;
+        height: 40px;
+        border-radius: 50%;
+        display: inline-block;
+        margin: 0;
+        padding: 0;
+        background-color: #8186d5;
+        color: #fff;
+    }
+
+    .footer-20192 .social li a > span {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        -webkit-transform: translate(-50%, -50%);
+        -ms-transform: translate(-50%, -50%);
+        transform: translate(-50%, -50%);
+    }
+
+    .footer-20192 .footer-logo {
+        color: #fff;
+        font-size: 20px;
+        text-transform: uppercase;
+        letter-spacing: .1rem;
+    }
+
+    .footer-20192 .copyright {
+        color: #666873;
+    }
+
+    .footer-20192 .cta {
+        -webkit-box-shadow: -20px -20px 0 0 rgba(52, 58, 64, 0.2);
+        box-shadow: -20px -20px 0 0 rgba(52, 58, 64, 0.2);
+        padding: 20px;
+        background-color: #8186d5;
+        top: -150px;
+        position: relative;
+    }
+
+    .footer-20192 .cta h2, .footer-20192 .cta h3 {
+        line-height: 1.5;
+    }
+
+    .footer-20192 .cta h3 {
+        font-size: 20px;
+    }
+</style>
+<script>
+    const button = document.getElementById('productButton');
+    const productsSection = document.getElementById('products');
+
+    button.addEventListener('click', scrollToProducts);
+    button.addEventListener('touchstart', scrollToProducts);
+
+    function scrollToProducts() {
+        productsSection.scrollIntoView({
+            behavior: 'smooth',
+            block: 'center'
+        });
+    }
+
+    function scrollToTarget() {
+        const targetSection = document.getElementById('targetDiv');
+        targetSection.scrollIntoView({behavior: 'smooth', block: 'start'});
+    }
+
+
+</script>
+
+
+<!-- jQuery and Bootstrap Bundle (includes Popper) -->
+<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/js/all.min.js"></script>
+<script src="/fonts/all.js"></script>
+
+
+</body>
+</html>

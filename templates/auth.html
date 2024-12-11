@@ -1,0 +1,197 @@
+<!DOCTYPE html>
+<html lang="fa">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>سوخت‌رسانی آنلاین</title>
+    <!-- Tailwind CSS CDN -->
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    {% load static %}
+    <link rel="icon" type="image/png" href="{% static 'images/fav2.png' %}">
+    <style>
+        @font-face {
+            font-family: 'MyFont';
+            src: url('/static/font/Shabnam-Medium.woff') format('woff');
+        }
+
+
+        body {
+            font-size: 13px;
+            min-height: 100vh;
+            background: linear-gradient(to bottom, #2a3a64, #5676e0, #8d8dcb);
+            font-family: 'MyFont', sans-serif;
+
+        }
+
+        .main {
+            margin-top: 100px;
+            width: 330px;
+            height: 500px;
+            background: red;
+            overflow: hidden;
+            background: url("https://doc-08-2c-docs.googleusercontent.com/docs/securesc/68c90smiglihng9534mvqmq1946dmis5/fo0picsp1nhiucmc0l25s29respgpr4j/1631524275000/03522360960922298374/03522360960922298374/1Sx0jhdpEpnNIydS4rnN4kHSJtU1EyWka?e=view&authuser=0&nonce=gcrocepgbb17m&user=03522360960922298374&hash=tfhgbs86ka6divo3llbvp93mg4csvb38") no-repeat center/ cover;
+            border-radius: 10px;
+            box-shadow: 5px 20px 50px #000;
+        }
+
+        #chk {
+            display: none;
+        }
+
+        .login {
+            position: relative;
+            width: 100%;
+            height: 100%;
+        }
+
+        label {
+            color: #fff;
+            font-size: 2.3em;
+            justify-content: center;
+            display: flex;
+            margin: 50px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: .5s ease-in-out;
+        }
+
+        input {
+            width: 60%;
+            height: 10px;
+            background: #e0dede;
+            justify-content: center;
+            display: flex;
+            margin: 20px auto;
+            padding: 12px;
+            border: none;
+            outline: none;
+            border-radius: 5px;
+        }
+
+        .button1 {
+            width: 60%;
+            height: 40px;
+            margin: 10px auto;
+            justify-content: center;
+            display: block;
+            color: #fff;
+            background: #2243b0;
+            font-size: 1em;
+            font-weight: bold;
+            margin-top: 30px;
+            outline: none;
+            border: none;
+            border-radius: 5px;
+            transition: .2s ease-in;
+            cursor: pointer;
+        }
+
+        .button1:hover {
+            background: #6d44b8;
+        }
+
+        .signup {
+            height: 460px;
+            background: #eee;
+            border-radius: 60% / 10%;
+            transform: translateY(-180px);
+            transition: .8s ease-in-out;
+        }
+
+        .signup label {
+            color: #573b8a;
+            transform: scale(.6);
+        }
+
+        #chk:checked ~ .signup {
+            transform: translateY(-500px);
+        }
+
+        #chk:checked ~ .signup label {
+            transform: scale(1);
+        }
+
+        #chk:checked ~ .signup label {
+            transform: scale(.6);
+        }
+
+    </style>
+</head>
+
+<body>
+{% include 'header.html' %}
+
+
+<div class="container">
+    <div class="main mx-auto">
+        <input type="checkbox" id="chk" aria-hidden="true">
+        <div class="login">
+            <form method="post">  {% csrf_token %}
+                <label for="chk" aria-hidden="true">ورود یا ثبت نام</label>
+                <input type="number" name="n_code" placeholder="کد ملی ۱۰ رقمی" required="" minlength="10"
+                       maxlength="10">
+                {% if msg %}
+                    <p class="sticky-message container mx-auto text-center" id="stickyMsg">{{ msg }}</p>
+
+                {% endif %}
+                <style>
+                    .sticky-message {
+                        position: fixed;
+                        top: 10%;
+                        left: 0;
+                        right: 0;
+                        background-color: #BF0A30;
+                        color: white;
+                        padding: 10px;
+                        margin: 0;
+                        width: 320px;
+                        height: 40px;
+                        z-index: 1000;
+                        border-radius: 30px;
+                        box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+                        font-size: 15px;
+                    }
+
+
+                </style>
+                <input type="number" name="phone" placeholder="شماره همراه ۱۱ رقمی" required="" minlength="11"
+                       maxlength="11">
+                <button class="button1" type="submit">ورود</button>
+            </form>
+        </div>
+
+
+        <div class="signup">
+            <form>
+                <label for="chk" aria-hidden="true">فراموشی رمز </label>
+                <input type="text" name="txt" placeholder="User name" required="">
+                <input type="password" name="pswd" placeholder="Password" required="">
+                <button class="button1">Sign up</button>
+            </form>
+        </div>
+    </div>
+</div>
+<script>
+    // تابع برای مخفی کردن پیام بعد از 5 ثانیه
+    window.onload = function () {
+        const msgElement = document.getElementById('stickyMsg');
+        if (msgElement) {
+            setTimeout(function () {
+                msgElement.style.display = 'none'; // مخفی کردن پیام
+            }, 5000); // 5000 میلی‌ثانیه = 5 ثانیه
+        }
+    };
+</script>
+
+<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/js/all.min.js"></script>
+<script src="/fonts/all.js"></script>
+
+</body>
+
+</html>

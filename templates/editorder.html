@@ -1,0 +1,258 @@
+<!DOCTYPE html>
+<html lang="fa">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <title>تغییر سفارش</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    <script src="https://static.neshan.org/sdk/leaflet/v1.9.4/neshan-sdk/v1.0.8/index.js"></script>
+    <link rel="stylesheet" href="https://static.neshan.org/sdk/leaflet/v1.9.4/neshan-sdk/v1.0.8/index.css"/>
+    {% load static %}
+    <link rel="icon" type="image/png" href="{% static 'images/fav2.png' %}">
+    <link rel="stylesheet" href="{% static 'css/pay.css' %}">
+
+
+</head>
+<body style="background-color: #BF0A30">
+{% include 'header.html' %}
+<style>
+    .sticky-message {
+        position: fixed;
+        top: 10%;
+        left: 0;
+        right: 0;
+        background-color: blue;
+        color: white;
+        padding: 10px;
+        margin: 0;
+        width: 320px;
+        height: 100px;
+        z-index: 1000;
+        border-radius: 30px;
+        box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+        font-size: 15px;
+    }
+
+
+</style>
+
+{#    #desktop#}
+<div class="container d-none d-md-block">
+    <div class="row">
+        <div class="col-md-6 ">
+            <div class="mx-auto" style="margin-top: 250px">
+                <h3 class="text-right" style="color: white">مقادیری که نیاز به تغییرات دارند رو اعمال کنید</h3>
+                <p class="text-right" style="color: white"></p>
+            </div>
+        </div>
+        <div class="col-md-6">
+            {% load static %}
+            <img src="{% static 'images/p3edit.png' %}" class=" w-100 h-10"
+                 style="object-fit: cover"
+                 alt="My image">
+        </div>
+    </div>
+</div>
+{#    mobile#}
+<div class="d-md-none">
+    <div class="col-12 aks_pay_mob">
+        {% load static %}
+        <img class="aks_pay_mob" src="{% static 'images/p3edit.png' %}"
+             style="height: 300px;object-fit: cover;border-bottom-right-radius: 20%;border-bottom-left-radius: 20%"
+             alt="My image">
+    </div>
+    <div class="col-12 mb-5">
+        <h2 class="text-right" style="color: white">فقط مقادیری که نیاز به تغییرات دارند رو اعمال کنید</h2>
+
+    </div>
+</div>
+
+
+<div class="container mx-auto col-md-6 bg-light mb-5" style="border-radius: 40px ">
+    {% if msg %}
+        <p class="sticky-message  mx-auto text-center" id="stickyMsg">{{ msg }}</p>
+    {% endif %}
+    <form method="POST" id="order-form" style="padding: 40px">
+        {% csrf_token %}
+        <div class="row">
+
+            <div class="form-group col-6 col-md-6 mt-2 text-right">
+                <label for="quantity"> :حجم (لیتر)</label>
+                <input type="number" style="border: 2px solid #000000" class="form-control" id="quantity"
+                       name="quantity" min="10" max="60" value="{{ order.quantity }}"
+                       oninput="updatePrice()">
+            </div>
+
+            <div class="form-group col-6 col-md-6 mt-2 text-right">
+                <label for="product" class="text-right">محصول:</label>
+                <select class="form-control" id="product" name="product" style="border: 2px solid #000000"
+                        onchange="updatePrice()">
+                    <option value="{{ order.product.id }}" selected>{{ order.product.name }}</option>
+                    {% for product in products %}
+                        <option value="{{ product.product_id }}">{{ product.name }}</option>
+                    {% endfor %}
+                </select>
+            </div>
+
+
+            <div class="form-group col-6 col-md-6 mt-2 text-right">
+                <label for="full_name">:تحویل گیرنده</label>
+                <input type="text" style="border: 2px solid #000000" class="form-control" id="full_name"
+                       name="fullname" value="{{ order.fullname }}">
+            </div>
+
+
+            <div class="form-group col-6 col-md-6 mt-2 text-right">
+                <label for="price">:قیمت</label>
+                <input type="text" class="form-control bg-light" id="price" name="price"
+                       style="border: 2px solid #000000"
+                       value="حجم را تغییر دهید تا قیمت اپدیت شود"
+                       readonly>
+            </div>
+            <div class="form-group col-md-6 mt-2">
+                <label class="bg-light" style="border: 2px solid #000000">
+                    <select name="time">
+                        <option class="text-center" disabled selected value="0"> تغییر ساعت</option>
+                        <option class="text-right" value="7">هفت تا نه صبح</option>
+                        <option class="text-right" value="9"><p>نه الی یازده صبح</p></option>
+                        <hr>
+                        <option class="text-right" value="11">یازده الی یک ظهر</option>
+                        <option class="text-right" value="13">یک الی سه ظهر</option>
+                        <hr>
+                        <option class="text-right" value="15">سه الی پنج عصر</option>
+                        <option class="text-right" value="17">پنج الی هفت عصر</option>
+                        <hr>
+                        <option class="text-right" value="19">هفت الی نه شب</option>
+                        <option class="text-right" value="21">نه الی یازده شب</option>
+                    </select>
+                </label>
+            </div>
+            <div class="form-group col-md-12">
+                <p>فقط درصورت تغییر, لوکیشن را مجددا انتخاب کنید</p>
+                <div id="map" style="border-radius: 50px;border: 2px solid #000000"></div>
+            </div>
+            <input type="hidden" id="lat" name="lat">
+            <input type="hidden" id="lon" name="lon">
+            <div class="form-group  col-md-12">
+                <label for="description"></label>
+                <input class="form-control" style="border: 2px solid #000000"
+                       placeholder={{ order.description }} id="description"
+                       name="description" rows="3">
+            </div>
+            <div class="col-md-12 text-center mt-2">
+                <button class="col-md-12 d-none d-md-block button" style="background-color: #1ebe12"
+                        type="submit">
+                    ذخیره اطلاعات
+                </button>
+            </div>
+            <div class="text-center col-12">
+                <button class="col-12  button  d-md-none mx-auto" style="background-color: #1ebe12;"
+                        type="submit">
+                    ذخیره اطلاعات
+                </button>
+            </div>
+
+        </div>
+    </form>
+
+    {#    <form action="{% url 'delete' order.id %}" method="post">#}
+    {#        {% csrf_token %}#}
+    {#        <button  type="submit" class="d-none d-md-block col-md-5  button float-left"#}
+    {#                style="background-color: blue">#}
+    {#            حذف سفارش#}
+    {#        </button>#}
+    {#    </form>#}
+
+
+</div>
+</div>
+</form>
+
+</div>
+<script>
+    var map;
+    var marker;
+    var selectedLat, selectedLon;
+
+    function initMap() {
+        map = new L.Map('map', {
+            key: 'web.640eeefb0692499b8bc6b6d73c4d86ef',  // کلید API خود را جایگزین کنید
+            maptype: 'neshan',
+            poi: true,
+            traffic: false,
+            center: [34.6416, 50.8759], // مرکز نقشه به شهر قم
+            zoom: 12
+        });
+
+        map.on('dblclick', function (e) {
+            var latlng = e.latlng;
+            selectedLat = latlng.lat;
+            selectedLon = latlng.lng;
+            document.getElementById('lat').value = selectedLat;
+            document.getElementById('lon').value = selectedLon;
+            if (marker) {
+                marker.setLatLng(latlng);
+            } else {
+                marker = L.marker(latlng).addTo(map);
+            }
+        });
+    }
+
+    // محصولات و قیمت‌هایشان
+    const productPrices = {
+        {% for product in products %}
+            '{{ product.product_id }}': {{ product.price }},
+        {% endfor %}
+    };
+
+    document.addEventListener('DOMContentLoaded', (event) => {
+        const inputField = document.getElementById('price');
+        const placeholderText = 'ابتدا محصول و لیتر را انتخاب کنید.';
+        let currentIndex = 0;
+        let scrolling = true;
+
+        function scrollText() {
+            if (scrolling) {
+                inputField.value = placeholderText.slice(currentIndex) + ' ' + placeholderText.slice(0, currentIndex);
+                currentIndex = (currentIndex + 1) % placeholderText.length;
+            }
+        }
+
+        setInterval(scrollText, 200);
+
+        window.updatePrice = function () {
+            const productElement = document.getElementById('product');
+            const quantityElement = document.getElementById('quantity');
+            const selectedProduct = productElement.value;
+            const quantity = quantityElement.value;
+
+            if (selectedProduct && quantity) {
+                const pricePerUnit = productPrices[selectedProduct];
+                const totalPrice = pricePerUnit * quantity;
+                inputField.value = totalPrice + ' تومان';
+                scrolling = false; // Stop the scrolling
+            }
+        }
+    });
+
+    window.onload = function () {
+        initMap(); // بارگذاری نقشه
+        hideMessage(); // مخفی کردن پیام
+    };
+
+
+    // تابع برای مخفی کردن پیام بعد از 5 ثانیه
+    function hideMessage() {
+        const msgElement = document.getElementById('stickyMsg');
+        if (msgElement) {
+            setTimeout(function () {
+                msgElement.style.display = 'none'; // مخفی کردن پیام
+            }, 5000); // 5000 میلی‌ثانیه = 5 ثانیه
+        }
+    }
+</script>
+</body>
+</html>
