@@ -81,10 +81,10 @@ WSGI_APPLICATION = 'sokht.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.mysql',
-        'NAME': 'saeidkhan$default',
-        'USER': 'saeidkhan',
-        'PASSWORD': 'mohammad@',
-        'HOST': 'saeidkhan.mysql.pythonanywhere-services.com',
+        'NAME': 'saeidkhan$sokht',
+        'USER': 'mohammad24',
+        'PASSWORD': 'rootroot',
+        'HOST': 'mohammad24.mysql.pythonanywhere-services.com',
         'PORT': '3306',
     }
 }
