@@ -1,0 +1,323 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+    <link rel="icon" type="image/png" href="{% static 'images/fav2.png' %}">
+
+
+    <title>Title</title>
+</head>
+<body style="background-color: #131a25">
+<div class="container d-none d-md-block">
+    <div class="row">
+        <div class="h-100 w-100">
+            <div class="p-3" style="background:none;">
+                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
+                     class="bi bi-arrow-right float-right mt-2 text-light" viewBox="0 0 16 16">
+                    <path fill-rule="evenodd"
+                          d="M1 8a.5.5 0 0 1 .5-.5h11.793l-3.147-3.146a.5.5 0 0 1 .708-.708l4 4a.5.5 0 0 1 0 .708l-4 4a.5.5 0 0 1-.708-.708L13.293 8.5H1.5A.5.5 0 0 1 1 8"/>
+                </svg>
+                <a href="http://localhost:8000/"><button class="float-right text-light" style="border:none;background-color: #3269f1;">رد کردن</button></a>
+            </div>
+            <h2 class="text-center mt-5 text-light"> فیولیت مثلا این کارو میکنه نگاه نکنید</h2>
+            <p class="text-center text-light">راحتی در زمان و وقت خودتون دیگه نگران نباشید و راحتی خود را به ما
+                بسپارید</p>
+            <div class="w-50 mx-auto mt-5">
+                {% load static %}
+                <img src="{% static 'images/nemodar_s.png' %}" class="w-100">
+            </div>
+        </div>
+    </div>
+</div>
+<style>
+    .page {
+        display: flex; /* مخفی کردن همه صفحات */
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        text-align: center;
+        height: 100vh; /* تمام ارتفاع صفحه */
+        width: 100%;
+        opacity: 1;
+        transition: opacity 2s ease;
+        /* انیمیشن محو شدن */
+    }
+
+    .hidden {
+        display: none !important;
+    }
+
+    .page.active {
+        display: flex !important; /* فقط صفحه فعال نمایش داده می‌شود */
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        text-align: center;
+        height: 100vh; /* تمام ارتفاع صفحه */
+        width: 100%;
+        opacity: 1; /* صفحه فعال باید نمایان باشد */
+    }
+
+    button:focus {
+        outline: none;
+    }
+
+    html, body {
+        height: 100%;
+        margin: 0;
+        padding: 0;
+        overflow: hidden; /* حذف اسکرول */
+    }
+
+    .container_mobile {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 100vh;
+        width: 100vw;
+    }
+
+    .content {
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+        align-items: center;
+        height: 90%;
+        width: 90%;
+        text-align: center;
+    }
+
+    .text-section {
+        flex: 1;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+    }
+
+    .image-section {
+        flex: 2;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+
+    .image-section img {
+        width: 300px;
+        height: 300px;
+        object-fit: contain;
+    }
+
+    .action-section {
+        flex: 1;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+    }
+
+    .menu {
+        display: flex;
+        justify-content: center;
+        gap: 10px;
+        margin-bottom: 50px;
+    }
+
+    .menu .dot {
+        width: 10px;
+        height: 10px;
+        background-color: #7d7d7d;
+        border-radius: 50%;
+    }
+
+    .dot-active {
+        background-color: #fff !important;
+    }
+
+    .button {
+        /*width: 150px;*/
+        /*height: 10px;*/
+        border-radius: 10px;
+        background-color: #623AA2;
+        color: white;
+        border: none;
+        padding: 12px 24px !important;
+        font-size: 16px;
+        cursor: pointer;
+        margin-bottom: 50px;
+    }
+
+    .button1 {
+        /*width: 40px;*/
+        /*height: 10px;*/
+        border-radius: 25px;
+        background-color: #fff;
+        color: #007bff;
+        border: none;
+        font-size: 16px;
+        cursor: pointer;
+        padding: 11px 28px;
+        margin-bottom: 30px;
+        gap: 10px;
+
+    }
+
+</style>
+<div class="text-right p-3 d-md-none" style="background:none;">
+    <a href="http://localhost:8000/"><button class="text-light" style="border:none;background-color: #131a25;">رد کردن</button></a>
+    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
+         class="bi bi-arrow-right text-right mt-2 text-light" viewBox="0 0 16 16">
+        <path fill-rule="evenodd"
+              d="M1 8a.5.5 0 0 1 .5-.5h11.793l-3.147-3.146a.5.5 0 0 1 .708-.708l4 4a.5.5 0 0 1 0 .708l-4 4a.5.5 0 0 1-.708-.708L13.293 8.5H1.5A.5.5 0 0 1 1 8"/>
+    </svg>
+</div>
+<div class="container_mobile d-md-none">
+    <div class="page page-1 " id="div1">
+        <div class="content">
+            <div class="text-section">
+                <h2  class="text-light">صرفه جویی زمان</h2>
+                <p class="text-light">راحتی و سرعت در تحویل سوخت را برای
+                    شما به ارمغان می آوریم دیگر نگران  تلف شدن زمان خود در پمپ بنرین نباشید فیولیت حلش میکنه</p>
+            </div>
+            <div class="image-section">
+                {% load static %}
+                <img src="{% static 'images/sorat.png' %}" class="w-100" alt="">
+            </div>
+            <div class="action-section">
+                <div class="menu">
+                    <div class="dot dot-active"></div>
+                    <div class="dot"></div>
+                    <div class="dot"></div>
+                </div>
+                <button onclick="showNextDiv(2)" class="button next-button" data-target="2">بعدی</button>
+            </div>
+        </div>
+    </div>
+    <!-- صفحه دوم -->
+    <div class="page page-2 hidden" id="div2">
+        <div class="content">
+            <div class="text-section">
+                <h2 class="text-light">هوای پاک حق شماست</h2>
+                <p class="text-light">با ثبت سفارش از سایت ما به محیط زیست و سلامت فرزندان خود کمک کنید.</p>
+            </div>
+            <div class="image-section">
+                {% load static %}
+                <img src="{% static 'images/jahan.png' %}" class="w-100" alt="">
+            </div>
+            <div class="action-section">
+                <div class="menu">
+                    <div class="dot"></div>
+                    <div class="dot dot-active"></div>
+                    <div class="dot"></div>
+                </div>
+                <button onclick="showNextDiv(3)"
+                        class="button next-button "
+                        data-target="3">بعدی
+                </button>
+            </div>
+        </div>
+    </div>
+    <!-- صفحه سوم -->
+    <div class="page page-3 hidden" id="div3">
+        <div class="content">
+            <div class="text-section">
+                <h2 class="text-light">از تجمعات دوری کنید</h2>
+                <p class="text-light">با کاهش تجمع در مکان های عمومی از شیوع
+
+بیماری های واگیردار جلوگیری کنید</p>
+            </div>
+            <div class="image-section">
+                {% load static %}
+                <img src="{% static 'images/virus2.png' %}" class="w-100" alt="">
+            </div>
+            <div class="action-section">
+                <div class="menu">
+                    <div class="dot"></div>
+                    <div class="dot"></div>
+                    <div class="dot dot-active"></div>
+                </div>
+                <a href="http://localhost:8000/time/"><button  class="button back-button" data-target="2">ثبت نام</button></a>
+<!--                onclick="showNextDiv(2)"-->
+            </div>
+        </div>
+    </div>
+</div>
+<script>
+
+    // document.addEventListener("DOMContentLoaded", () => {
+    //     // انتخاب تمامی صفحات
+    //     const pages = document.querySelectorAll(".page");
+    //
+    //     // انتخاب تمامی دکمه‌های "بعدی"
+    //     const nextButtons = document.querySelectorAll(".next-button");
+    //
+    //     // انتخاب تمامی دکمه‌های "قبلی"
+    //     const backButtons = document.querySelectorAll(".back-button");
+    //
+    //     // اگر صفحه یا دکمه‌ای وجود ندارد، اجرا متوقف شود
+    //     if (!pages.length || (!nextButtons.length && !backButtons.length)) {
+    //         console.error("صفحات یا دکمه‌های مربوطه یافت نشدند.");
+    //         return;
+    //     }
+    //
+    //     // تابع تغییر صفحه
+    //     nextButtons.forEach(button => {
+    //         button.addEventListener("click", () => {
+    //             const targetPage = button.getAttribute("data-target");
+    //             changePage(targetPage);
+    //         });
+    //     });
+    //
+    //     backButtons.forEach(button => {
+    //         button.addEventListener("click", () => {
+    //             const targetPage = button.getAttribute("data-target");
+    //             changePage(targetPage);
+    //         });
+    //     });
+    // });
+
+    // تابع تغییر صفحه
+    // function changePage(targetPage) {
+    //     const pages = document.querySelectorAll(".page");
+    //     // بررسی اینکه صفحه مورد نظر موجود باشد
+    //     const targetElement = document.querySelector(`.page-${targetPage}`);
+    //     if (!targetElement) {
+    //         console.error(`صفحه ${targetPage} یافت نشد.`);
+    //         return;
+    //     }
+    //
+    //     // حذف کلاس "active" از تمام صفحات
+    //     pages.forEach(page => page.classList.remove("active"));
+    //
+    //     // اضافه کردن کلاس "active" به صفحه هدف
+    targetElement.style.display = "flex"; // نمایش صفحه هدف
+    setTimeout(() => {
+        targetElement.classList.add("active"); // اضافه کردن کلاس active
+        targetElement.style.opacity = 1; // نمایان کردن صفحه هدف
+    }, 50); // کمی تاخیر برای انیمیشن
+    // }
+    function showNextDiv(nextDivId) {
+        // مخفی کردن تمامی دیوها
+        document.querySelectorAll(".container_mobile .page").forEach(div => {
+            console.log('d', div)
+            div.classList.add("hidden");
+        });
+
+        // نمایش دیو مورد نظر
+        const nextDiv = document.getElementById(`div${nextDivId}`);
+        if (nextDiv) {
+            nextDiv.classList.remove("hidden");
+        }
+    }
+</script>
+<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/js/all.min.js"></script>
+<script src="/fonts/all.js"></script>
+
+</body>
+</html>

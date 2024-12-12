@@ -50,6 +50,8 @@ def auth(request):
 
 
 def home(request):
+    if not request.session.get('seen_guide', False):
+        return redirect('client:site_guide')
     products = Product.objects.all()
     return render(request, 'homepage.html', {'products': products, 'user': request.user})
 
@@ -57,3 +59,9 @@ def home(request):
 def logout_view(request):
     logout(request)
     return redirect('client:home')  # به صفحه خانه برمی‌گردد
+
+
+def site_guide_view(request):
+    # تنظیم مقدار 'seen_guide' به True برای علامت زدن نمایش صفحه راهنما
+    request.session['seen_guide'] = True
+    return render(request, 'site_guide.html')  # نمایش صفحه راهنما

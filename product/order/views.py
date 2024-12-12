@@ -151,6 +151,7 @@ def update(request):
 
         return render(request, 'moj.html', {'order': order})
     else:
+
         user = request.user
         try:
             order = Order.objects.get(user_id=user.id)

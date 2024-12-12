@@ -204,7 +204,7 @@
     <h2 class="text-light text-center mx-auto">{% if order.product_id == 2 %}بنزین سوپر{% elif order.product_id == 1 %}
         بنزین معمولی {% else %}اوکتان{% endif %}</h2>
     <p class="p1">{{ order.amount }}</p>
-    <p class="p2">  لیتر{{ order.quantity }}</p>
+    <p class="p2"> {{ order.quantity }} لیتر </p>
 </div>
 
 <a href="http://localhost:8000/order/"><button type="button" class="btn mx-auto btnf btn-dark w-75">سفارشات من</button></a>
