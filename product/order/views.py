@@ -101,7 +101,7 @@ def time(request, pk=None):
 
 def order(request):
     try:
-        orders = Order.objects.filter(user=request.user)
+        orders = Order.objects.get(user=request.user)
         return render(request, 'order1.html', {'orders': orders})
     except CustomUser.DoesNotExist:
         return redirect('client:auth')
