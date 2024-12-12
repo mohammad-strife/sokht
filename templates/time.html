@@ -20,7 +20,16 @@
     <link
             href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet"/>
     <style>
+        html, body {
+            height: 100%;
+            margin: 0;
+            padding: 0;
+            background: #20252E;
+            overflow: hidden;
+        }
+
         .footer {
+            padding: 10px;
             border-top-right-radius: 21px;
             border-top-left-radius: 21px;
             position: fixed;
@@ -37,6 +46,34 @@
             align-items: center;
             z-index: 100;
             border: 1px solid white;
+        }
+
+        .button2:focus {
+            outline: none;
+            border: none;
+            background: none;
+        }
+
+        .button2 {
+            background: none;
+            border: none;
+            color: white;
+            z-index: 100;
+            margin-top: 20px;
+        }
+
+        .button2:hover {
+            border: none;
+            background: none;
+        }
+
+        .back1 {
+            background: linear-gradient(to right, #CF9845, #A512EA);
+            padding: 15px;
+            border: 1px solid white;
+            border-radius: 50%;
+            margin-bottom: 55px;
+            color: white;
         }
 
     </style>
@@ -139,8 +176,6 @@
         </svg>
     </button>
 </div>
-
-
 <!-- <div class="image-container absolute top-64">
     <img src="./images/Vector 2.png" alt="Image" class="rotate-180 absolute" />
 </div> -->
