@@ -23,7 +23,7 @@
     {% load static %}
     <img src="{% static 'images/Frame_25__1_-removebg-preview.png' %}" class="h-28" alt=""/>
 </div>
-<form method="post" action="{% url 'order' %}">
+<form method="post" action="{% url 'update' %}">
     {% csrf_token %}
     <div class="w-4/6 mx-auto">
         <div
@@ -49,7 +49,7 @@
                 </select>
                 <input
                         type="number" id="quantity"
-                        name="litr" min="10" max="60" placeholder="  10 الی 60 لیتر "
+                        name="litre" min="10" max="60" placeholder="  10 الی 60 لیتر "
                         class="p-4 rounded-2xl w-1/2 text-center shadow-md shadow-indigo-500/50"/>
             </div>
             <div class="w-full">

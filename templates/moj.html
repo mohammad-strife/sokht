@@ -1,0 +1,272 @@
+<!DOCTYPE html>
+<html lang="fa">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <link rel="stylesheet" href="https://static.neshan.org/sdk/leaflet/v1.9.4/neshan-sdk/v1.0.8/index.css"/>
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+    <link rel="icon" type="image/png" href="{% static 'images/fav2.png' %}">
+    <title>صفحه با بک‌گراند گیف</title>
+    <style>
+
+        .water-round-container {
+            margin: 0 auto;
+            overflow: hidden;
+            position: relative;
+            width: 300px;
+            height: 300px;
+            text-align: center;
+            line-height: 50px;
+            animation: water-waves linear infinite;
+        }
+
+        .water-wave1 {
+            background: #b627e0;
+            position: absolute;
+            top: 40%;
+            left: -25%;
+            opacity: 0.7;
+            width: 200%;
+            height: 200%;
+            border-radius: 40%;
+            animation: inherit;
+            animation-duration: 5s;
+        }
+
+        .water-wave2 {
+            position: absolute;
+            top: 45%;
+            left: -35%;
+            opacity: 0.5;
+            width: 200%;
+            height: 200%;
+            border-radius: 35%;
+            animation: inherit;
+            animation-duration: 7s;
+        }
+
+        .water-wave3 {
+            position: absolute;
+            top: 50%;
+            left: -35%;
+            background: #b210ff;
+            opacity: 0.5;
+            width: 200%;
+            height: 200%;
+            border-radius: 33%;
+            animation: inherit;
+            animation-duration: 11s;
+        }
+
+        @keyframes water-waves {
+            0% {
+                transform: rotate(0deg);
+            }
+            100% {
+                transform: rotate(360deg);
+            }
+        }
+
+        /* تنظیمات مخصوص موبایل */
+        @media (max-width: 768px) {
+            .water-round-container {
+                position: absolute;
+                left: 50%;
+                bottom: 100%;
+                transform: translateX(-50%);
+                width: 100%;
+                max-width: 400px;
+                height: 400px;
+            }
+        }
+
+        .background {
+            background: linear-gradient(
+                    180deg,
+                    rgba(34, 34, 60, 0.5) 0%, /* شفافیت کمتر در بالا */ hsla(282, 78%, 47%, 1) 0%,
+                    hsla(281, 100%, 53%, 1) 25%,
+                    hsla(55, 74%, 45%, 1) 83%,
+                    hsla(55, 74%, 45%, 1) 100%
+            );
+            left: 0;
+            right: 0;
+            bottom: 0;
+            position: fixed;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 33vh;
+        }
+
+
+        button {
+            background: none;
+            border: none;
+            color: white;
+            z-index: 100;
+            margin-top: 20px;
+        }
+
+        button:hover {
+            border: none;
+            background: none;
+        }
+
+
+        .back1 {
+            background: #2f2f2f;
+            padding: 15px;
+            border-radius: 50%;
+            margin-bottom: 55px;
+        }
+
+        .footer {
+            border-top-right-radius: 40px;
+            border-top-left-radius: 40px;
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background-image: linear-gradient(179.6deg, rgb(194, 135, 97) 0.2%, rgb(116, 110, 141) 99.8%);
+            -webkit-backdrop-filter: blur(30px);
+            backdrop-filter: blur(30px);
+            height: 67px;
+            width: 100%; /* Fixed height for footer */
+            display: flex;
+            justify-content: space-around;
+            align-items: center;
+            z-index: 100;
+            border: 1px solid white;
+        }
+
+        .btnf {
+            bottom: 100px;
+            position: fixed;
+            left: 0;
+            right: 0;
+            height: 50px;
+            border-radius: 50px;
+
+        }
+
+        h2 {
+            bottom: 50%;
+            left: 0;
+            right: 0;
+            position: fixed;
+            text-align: center;
+        }
+
+        .p1 {
+            bottom: 30%;
+            left: 0;
+            right: 0;
+            position: fixed;
+            text-align: center;
+            color: white;
+
+        }
+
+        .p2 {
+            bottom: 26%;
+            left: 0;
+            right: 0;
+            position: fixed;
+            text-align: center;
+            color: white;
+            font-size: 15px;
+            font-weight: bold;
+
+        }
+
+        .img1 {
+            left: 0;
+            right:30px;
+            position: fixed;
+
+        }
+
+
+    </style>
+</head>
+<body style="background-color: #20252E">
+<div class="background mx-auto">
+    <div class="water-round-container">
+        <div class="water-wave1"></div>
+        <div class="water-wave2"></div>
+        <div class="water-wave3"></div>
+    </div>
+</div>
+{% for ord in order %}
+<div class="h2 mx-auto">
+    <h2 class="text-light text-center mx-auto">{% if ord.product_id == 2 %}بنزین سوپر{% elif ord.product_id == 1 %} بنزین معمولی {% else %}اوکتان{% endif %}</h2>
+    <p class="p1">{{ ord.amount }}</p>
+    <p class="p2">{{ ord.quantity }}</p>
+</div>
+{% endfor %}
+
+<button type="button" class="btn mx-auto btnf btn-dark w-75">Dark</button>
+
+<div class="footer">
+    <button class="footer-button" onclick="selectButton(this)">
+        <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" fill="currentColor" class="bi bi-people"
+             viewBox="0 0 16 16">
+            <path
+                    d="M15 14s1 0 1-1-1-4-5-4-5 3-5 4 1 1 1 1zm-7.978-1L7 12.996c.001-.264.167-1.03.76-1.72C8.312 10.629 9.282 10 11 10c1.717 0 2.687.63 3.24 1.276.593.69.758 1.457.76 1.72l-.008.002-.014.002zM11 7a2 2 0 1 0 0-4 2 2 0 0 0 0 4m3-2a3 3 0 1 1-6 0 3 3 0 0 1 6 0M6.936 9.28a6 6 0 0 0-1.23-.247A7 7 0 0 0 5 9c-4 0-5 3-5 4q0 1 1 1h4.216A2.24 2.24 0 0 1 5 13c0-1.01.377-2.042 1.09-2.904.243-.294.526-.569.846-.816M4.92 10A5.5 5.5 0 0 0 4 13H1c0-.26.164-1.03.76-1.724.545-.636 1.492-1.256 3.16-1.275ZM1.5 5.5a3 3 0 1 1 6 0 3 3 0 0 1-6 0m3-2a2 2 0 1 0 0 4 2 2 0 0 0 0-4"/>
+            <p>user</p>
+        </svg>
+    </button>
+    <button class="footer-button" onclick="selectButton(this)">
+        <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" fill="currentColor" class="bi bi-pin-map-fill"
+             viewBox="0 0 16 16">
+            <path fill-rule="evenodd"
+                  d="M3.1 11.2a.5.5 0 0 1 .4-.2H6a.5.5 0 0 1 0 1H3.75L1.5 15h13l-2.25-3H10a.5.5 0 0 1 0-1h2.5a.5.5 0 0 1 .4.2l3 4a.5.5 0 0 1-.4.8H.5a.5.5 0 0 1-.4-.8z"/>
+            <path fill-rule="evenodd" d="M4 4a4 4 0 1 1 4.5 3.969V13.5a.5.5 0 0 1-1 0V7.97A4 4 0 0 1 4 3.999z"/>
+            <p>location</p>
+
+        </svg>
+    </button>
+    <button class="footer-button back1" onclick="selectButton(this)">
+        <svg xmlns="http://www.w3.org/2000/svg" width="40" height="40" fill="currentColor" class="bi bi-app-indicator"
+             viewBox="0 0 16 16">
+            <path
+                    d="M5.5 2A3.5 3.5 0 0 0 2 5.5v5A3.5 3.5 0 0 0 5.5 14h5a3.5 3.5 0 0 0 3.5-3.5V8a.5.5 0 0 1 1 0v2.5a4.5 4.5 0 0 1-4.5 4.5h-5A4.5 4.5 0 0 1 1 10.5v-5A4.5 4.5 0 0 1 5.5 1H8a.5.5 0 0 1 0 1z"/>
+            <path d="M16 3a3 3 0 1 1-6 0 3 3 0 0 1 6 0"/>
+
+        </svg>
+    </button>
+
+    <button class="footer-button" onclick="selectButton(this)">
+        <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" fill="currentColor" class="bi bi-house"
+             viewBox="0 0 16 16">
+            <path
+                    d="M8.707 1.5a1 1 0 0 0-1.414 0L.646 8.146a.5.5 0 0 0 .708.708L2 8.207V13.5A1.5 1.5 0 0 0 3.5 15h9a1.5 1.5 0 0 0 1.5-1.5V8.207l.646.647a.5.5 0 0 0 .708-.708L13 5.793V2.5a.5.5 0 0 0-.5-.5h-1a.5.5 0 0 0-.5.5v1.293zM13 7.207V13.5a.5.5 0 0 1-.5.5h-9a.5.5 0 0 1-.5-.5V7.207l5-5z"/>
+            <p>home</p>
+
+        </svg>
+    </button>
+    <button class="footer-button" onclick="selectButton(this)">
+        <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" fill="currentColor" class="bi bi-bar-chart-fill"
+             viewBox="0 0 16 16">
+            <path
+                    d="M1 11a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1v3a1 1 0 0 1-1 1H2a1 1 0 0 1-1-1zm5-4a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1v7a1 1 0 0 1-1 1H7a1 1 0 0 1-1-1zm5-5a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1v12a1 1 0 0 1-1 1h-2a1 1 0 0 1-1-1z"/>
+            <p>order</p>
+
+        </svg>
+    </button>
+</div>
+
+<div class="img1 mx-auto">
+    <img src="{% static 'images/logon.png' %}" class="img1 mx-auto" style="width: 200px;height: 200px">
+</div>
+
+
+<script src=" https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/js/all.min.js"></script>
+</body>
+</html>

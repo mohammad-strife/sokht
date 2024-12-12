@@ -17,10 +17,7 @@ def pay(request, pk=None):
     if request.user.is_authenticated:
         if request.method == 'POST':
             if Order.objects.filter(user=request.user).exists():
-                msg = "شما یک سفارش فعال دارید!!!"
-                query_string = urlencode({'msg': msg})
-                url = f"{reverse('pay')}?{query_string}"
-                return redirect(url)
+                return redirect('moj')
 
             lat = request.POST.get('lat')
             lon = request.POST.get('lon')
@@ -128,37 +125,51 @@ def update(request):
     if request.method == 'POST':
         if not request.user.is_authenticated:
             return JsonResponse({'error': 'کاربر لاگین نشده است.'}, status=403)
-
         # گرفتن اطلاعات کاربر
         user = request.user
-
         # یافتن سفارش مرتبط
         try:
-            order = Order.objects.get(user_id=user.id, status="uncompleted")
+            order = Order.objects.get(user_id=user.id)
         except Order.DoesNotExist:
-            return JsonResponse({'error': 'سفارشی با وضعیت "uncompleted" یافت نشد.'}, status=404)
+            return redirect('client:home')
 
         # گرفتن داده‌های ارسال شده از کاربر
-        litr = request.POST.get('litr')
+        litre = request.POST.get('litre')
         saat = request.POST.get('saat')
         description = request.POST.get('description')
+        print(litre, saat, description)
 
         # اعتبارسنجی داده‌ها
-        if not litr or not litr.isdigit():
+        if not litre or not litre.isdigit():
             return JsonResponse({'error': 'مقدار لیتری معتبر وارد نشده است.'}, status=400)
 
         if not saat:
             return JsonResponse({'error': 'ساعت معتبر وارد نشده است.'}, status=400)
 
         # به‌روزرسانی اطلاعات سفارش
-        order.quantity = int(litr)
+        order.quantity = int(litre)
         order.date = saat  # بهتر است فرمت تاریخ را بررسی کنید
         order.description = description
         order.status = "completed"
         order.save()
 
-        return render(request, 'order1.html', {'order': order})
+        return render(request, 'moj.html', {'order': order})
     else:
-        print(request.user)
+        user = request.user
+        try:
+            order = Order.objects.get(user_id=user.id)
+        except Order.DoesNotExist:
+            return redirect('client:home')
+        if order.status == "completed":
+            return redirect('moj')
 
         return render(request, 'time.html')
+
+
+def moj(request):
+    print(111111)
+    user = request.user
+    print(user, user.id)
+    order = Order.objects.get(user_id=user.id)
+    print(order)
+    return render(request, 'moj.html', {'order': order})
