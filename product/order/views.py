@@ -13,7 +13,7 @@ from sokht import settings
 
 
 @csrf_exempt
-def pay(request, pk=None):
+def time(request, pk=None):
     if request.user.is_authenticated:
         if request.method == 'POST':
             if Order.objects.filter(user=request.user).exists():
@@ -94,17 +94,7 @@ def pay(request, pk=None):
                 )
                 return redirect('update')
             msg = "مقادیر را با دقت پر کنید لطفا"
-            return render(request, 'pay.html', {'msg': msg})
-
-        products = Product.objects.all()
-        if pk:
-            if products.filter(product_id=pk).exists():
-                pk = pk
-            else:
-                pk = 0
-        else:
-            pk = 0
-        return render(request, 'pay.html', {'products': products, 'pk': pk})
+            return render(request, 'homepage.html', {'msg': msg})
     else:
         return redirect('client:auth')
 
@@ -145,9 +135,15 @@ def update(request):
 
         if not saat:
             return JsonResponse({'error': 'ساعت معتبر وارد نشده است.'}, status=400)
-
+        litre = int(litre)
+        mahsol = order.product_id
+        ords = Product.objects.get(product_id=mahsol)
+        mm = ords.price
+        mm = int(mm)
+        ss = mm * litre
         # به‌روزرسانی اطلاعات سفارش
-        order.quantity = int(litre)
+        order.amount = ss
+        order.quantity = litre
         order.date = saat  # بهتر است فرمت تاریخ را بررسی کنید
         order.description = description
         order.status = "completed"
