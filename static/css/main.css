@@ -1,0 +1,146 @@
+html {
+    box-sizing: border-box;
+}
+
+*,
+*:before,
+*:after {
+    box-sizing: inherit;
+}
+
+body {
+    background-color: #333;
+    font-family: "Roboto", sans-serif;
+}
+.wrapper {
+    position: relative;
+    width: 120px;
+    height: 225px;
+    margin: 0 auto;
+
+    .main-button {
+        text-align: center;
+        color: #fff;
+        font-size: 68px;
+        position: absolute;
+        z-index: 9;
+        right: 0;
+        bottom: 0;
+        border-radius: 50%;
+        background-color: cyan;
+        height: 100px;
+        width: 100px;
+        transform: rotate(180deg) scale(0.9);
+        transition: all 0.3s ease;
+        cursor: pointer;
+        box-shadow: 0px 0px 20px #ccc;
+    }
+
+    .main-button.spin {
+        font-size: 76px;
+        transform: rotate(45deg) scale(1);
+        box-shadow: 0px 0px 8px #ccc;
+    }
+
+    .sub-button {
+        color: #fff;
+        text-align: center;
+        font-size: 44px;
+        position: absolute;
+        right: 15px;
+        bottom: 15px;
+        border-radius: 50%;
+        background-color: #42f4c2;
+        height: 65px;
+        width: 65px;
+        box-shadow: 0px 0px 8px #ccc;
+        transition: all 0.3s ease;
+
+        &:nth-child(2) {
+            background-color: #42d4f4;
+        }
+
+        &:nth-child(3) {
+            background-color: #42b6f4;
+        }
+
+        &:nth-child(4) {
+            background-color: #42f486;
+        }
+    }
+
+    .sub-button.spin {
+        right: 115px;
+        bottom: -20px;
+
+        &:nth-child(2) {
+            right: 110px;
+            bottom: 70px;
+        }
+
+        &:nth-child(3) {
+            right: -55px;
+            bottom: 100px;
+        }
+
+        &:nth-child(4) {
+            right: 35px;
+            bottom: 120px;
+        }
+    }
+}
+
+@import url("https://fonts.googleapis.com/css?family=Montserrat:300");
+
+#footer {
+    color: #fff;
+    font-family: "Montserrat", sans-serif;
+    position: fixed;
+    z-index: 9999;
+    bottom: 20px;
+    right: 20px;
+    font-size: 12px;
+
+    a {
+        color: #fff;
+        font-family: "Montserrat", sans-serif;
+    }
+}
+
+.custom-select {
+    position: relative;
+    font-family: Arial;
+}
+
+.select-selected {
+    background-color: #f1f1f1;
+    padding: 10px;
+    border: 1px solid #ccc;
+    cursor: pointer;
+}
+
+.select-items {
+    position: absolute;
+    background-color: #f1f1f1;
+    border: 1px solid #ccc;
+    z-index: 99;
+    display: none;
+}
+
+.select-items div {
+    padding: 10px;
+    cursor: pointer;
+}
+
+.select-items div:hover {
+    background-color: #ddd;
+}
+
+.select-hide {
+    display: none;
+}
+
+#ko {
+    transform: scaleX(-1);
+  }
+  

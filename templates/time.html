@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en" dir="rtl">
+<head>
+    <meta charset="UTF-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <title>Document</title>
+    <link
+            rel="stylesheet"
+            href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css"
+            integrity="sha512-9usAa10IRO0HhonpyAIVpjrylPvoDwiPUiKdWk5t3PyolY1cOd4DSE0Ga+ri4AuTroPR5aQvXU9xC6qOPnzFeg=="
+            crossorigin="anonymous"
+            referrerpolicy="no-referrer"
+    />
+    <link
+            href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet"/>
+</head>
+<body class="bg-slate-800">
+<div class="absolute -top-8">
+    {% load static %}
+    <img src="{% static "images/Vector 3-Photoroom.png" %}" alt=""/>
+</div>
+<div class="absolute left-0 top-4">
+    {% load static %}
+    <img src="{% static 'images/Frame_25__1_-removebg-preview.png' %}" class="h-28" alt=""/>
+</div>
+<form method="post" action="{% url 'order' %}">
+    {% csrf_token %}
+    <div class="w-4/6 mx-auto">
+        <div
+                class="h-screen flex flex-col items-center justify-center gap-4"
+        >
+            <div class="flex gap-4 w-full">
+                <select
+                        name="saat"
+                        id="cars"
+                        class="w-1/2 rounded-2xl bg-white text-center text-gray-400 shadow-md shadow-indigo-500/50">
+                    <option value="" disabled selected> ساعت دریافت</option>
+                    <option value="7">هفت تا نه صبح</option>
+                    <option value="9"><p>نه الی یازده صبح</p></option>
+                    <hr>
+                    <option value="11">یازده الی یک ظهر</option>
+                    <option value="13">یک الی سه ظهر</option>
+                    <hr>
+                    <option value="15">سه الی پنج عصر</option>
+                    <option value="17">پنج الی هفت عصر</option>
+                    <hr>
+                    <option value="19">هفت الی نه شب</option>
+                    <option value="21">نه الی یازده شب</option>
+                </select>
+                <input
+                        type="number" id="quantity"
+                        name="litr" min="10" max="60" placeholder="  10 الی 60 لیتر "
+                        class="p-4 rounded-2xl w-1/2 text-center shadow-md shadow-indigo-500/50"/>
+            </div>
+            <div class="w-full">
+                    <textarea
+                            rows="9"
+                            placeholder=" توضیحات بیشتر"
+                            class="w-full rounded-3xl py-2 px-3 shadow-md shadow-indigo-500/50"
+                            name="description"
+                    ></textarea>
+                <button
+                       type="submit" class="bg-white px-7 py-2 rounded-full bg-gradient-to-r from-indigo-500 via-purple-500 to-pink-500 mt-10">
+                    <i class="fa-solid fa-arrow-right fa-xl text-white"></i>
+                </button>
+            </div>
+        </div>
+    </div>
+</form>
+<!-- <div class="image-container absolute top-64">
+    <img src="./images/Vector 2.png" alt="Image" class="rotate-180 absolute" />
+</div> -->
+<script src="https://cdn.tailwindcss.com"></script>
+<script src="./tailwind.js"></script>
+</body>
+</html>

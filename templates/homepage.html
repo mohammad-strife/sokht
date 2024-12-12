@@ -1,0 +1,347 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <link rel="stylesheet" href="https://static.neshan.org/sdk/leaflet/v1.9.4/neshan-sdk/v1.0.8/index.css"/>
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+    <link rel="icon" type="image/png" href="{% static 'images/fav2.png' %}">
+
+    <title>Title</title>
+
+    <style>
+        html, body {
+            height: 100%;
+            margin: 0;
+            padding: 0;
+            overflow: hidden; /* Remove scroll */
+        }
+
+        #map {
+            height: 100%; /* Relative height */
+            width: 100%; /* Relative width */
+            max-height: 350px; /* Optional max height */
+            z-index: 1;
+        }
+
+
+        .product:hover {
+            background-color: #623AA2; /* Rang asli */
+            animation: pulse 2s infinite; /* Animation be sor'at 2 sanie va be soorat be soorat motavaghif */
+
+        }
+
+        .boxzir {
+            border-top-right-radius: 30px;
+            border-top-left-radius: 30px;
+            margin-top: -45px;
+            position: absolute;
+            z-index: 100;
+            background-color: #131a25;
+            width: 100vw; /* Ensure full width */
+            display: flex;
+            flex-direction: column;
+            align-items: center; /* Center items horizontally */
+            height: 100vh;
+        }
+
+        .imglogo {
+            width: 150px;
+            height: 120px;
+        }
+
+        .svg1 {
+            float: right;
+            margin-right: 10px;
+        }
+
+        .product {
+            padding: 10px;
+            margin: 10px;
+            cursor: pointer;
+            display: block;
+            width: 300px;
+            text-align: center;
+            border-radius: 15px;
+            background-color: #1a1f2a;
+            border: none;
+
+        }
+
+        .product.selected {
+            background-color: #623AA2;
+        }
+
+        .button1 {
+            padding: 10px 20px;
+            border: none;
+            cursor: pointer;
+            width: 300px;
+            border-radius: 15px;
+            margin-top: 20px; /* Added margin for spacing */
+            display: block;
+            background: linear-gradient(to right, #CF9845, #A512EA);
+        }
+
+        .button1:focus {
+            background: #04346e; /* Rang background dar hover */
+        }
+
+        .button1:hover {
+            background: #04346e;
+        }
+
+        .selected {
+            background: none;
+            border: 1px solid blue;
+        }
+
+        .container_mobile {
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            width: 100vw;
+
+        }
+
+        .footer {
+            border-top-right-radius: 40px;
+            border-top-left-radius: 40px;
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background-image: linear-gradient(179.6deg, rgb(19, 26, 37) 0.2%, rgb(122, 120, 120) 99.8%);
+            -webkit-backdrop-filter: blur(30px);
+            backdrop-filter: blur(30px);
+            height: 67px;
+            width: 100%; /* Fixed height for footer */
+            display: flex;
+            justify-content: space-around;
+            align-items: center;
+            z-index: 100;
+            border: 1px solid white;
+        }
+
+
+        button:focus {
+            outline: none;
+            border: none;
+            background: none;
+        }
+
+        button {
+            background: none;
+            border: none;
+            color: white;
+            z-index: 100;
+            margin-top: 20px;
+        }
+
+        button:hover {
+            border: none;
+            background: none;
+        }
+
+        /*.mahsolat {*/
+        /*    display: flex;*/
+        /*    flex-direction: column;*/
+        /*    align-items: center;*/
+        /*    height: 90%;*/
+        /*    width: 90%;*/
+        /*    text-align: center;*/
+
+        /*}*/
+
+        .back1 {
+            background: #2f2f2f;
+            padding: 15px;
+            border-radius: 50%;
+            margin-bottom: 55px;
+        }
+
+    </style>
+<body>
+<form method="post" action="{% url 'pay' %}">
+    <div style="height: 37vh; width: 100%;">
+        <div id="map"></div>
+    </div>
+    {% csrf_token %}
+    <input type="hidden" id="lat" name="lat">
+    <input type="hidden" id="lon" name="lon">
+    <!-- ورودی مخفی برای ارسال آی‌دی محصول -->
+    <input type="hidden" id="product-id" name="product_id">
+
+    <div class="container_mobile">
+        <div class="boxzir mx-auto d-block w-100">
+            {% load static %}
+            <div class="inline">
+                <img src="{% static 'images/logon.png' %}" class="imglogo" alt="" style="z-index: 101">
+                <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" fill="currentColor"
+                     class="bi bi-save mt-5  svg1 text-light"
+                     viewBox="0 0 16 16">
+                    <path d="M2 1a1 1 0 0 0-1 1v12a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1V2a1 1 0 0 0-1-1H9.5a1 1 0 0 0-1 1v7.293l2.646-2.647a.5.5 0 0 1 .708.708l-3.5 3.5a.5.5 0 0 1-.708 0l-3.5-3.5a.5.5 0 1 1 .708-.708L7.5 9.293V2a2 2 0 0 1 2-2H14a2 2 0 0 1 2 2v12a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2V2a2 2 0 0 1 2-2h2.5a.5.5 0 0 1 0 1z"/>
+                </svg>
+            </div>
+            <div class="mahsolat">
+                {% for p in products %}
+                    <div id="product{{ p.product_id }}" tabindex="0" class="mx-auto mt-3 product text-right text-light"
+                         data-product-id="{{ p.product_id }}">
+                        {{ p.name }} <span class="text-left float-left"> L : تومان {{ p.price }}</span>
+                    </div>
+                {% endfor %}
+                <div class="mx-auto">
+                    <button id="confirm-btn" type="submit" class="mt-4 button1 text-center mx-auto">ادامه</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</form>
+</div>
+<div class="footer">
+    <button class="footer-button" onclick="selectButton(this)">
+        <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" fill="currentColor" class="bi bi-people"
+             viewBox="0 0 16 16">
+            <path d="M15 14s1 0 1-1-1-4-5-4-5 3-5 4 1 1 1 1zm-7.978-1L7 12.996c.001-.264.167-1.03.76-1.72C8.312 10.629 9.282 10 11 10c1.717 0 2.687.63 3.24 1.276.593.69.758 1.457.76 1.72l-.008.002-.014.002zM11 7a2 2 0 1 0 0-4 2 2 0 0 0 0 4m3-2a3 3 0 1 1-6 0 3 3 0 0 1 6 0M6.936 9.28a6 6 0 0 0-1.23-.247A7 7 0 0 0 5 9c-4 0-5 3-5 4q0 1 1 1h4.216A2.24 2.24 0 0 1 5 13c0-1.01.377-2.042 1.09-2.904.243-.294.526-.569.846-.816M4.92 10A5.5 5.5 0 0 0 4 13H1c0-.26.164-1.03.76-1.724.545-.636 1.492-1.256 3.16-1.275ZM1.5 5.5a3 3 0 1 1 6 0 3 3 0 0 1-6 0m3-2a2 2 0 1 0 0 4 2 2 0 0 0 0-4"/>
+            <p>user</p>
+        </svg>
+    </button>
+    <button class="footer-button" onclick="selectButton(this)">
+        <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" fill="currentColor"
+             class="bi bi-pin-map-fill"
+             viewBox="0 0 16 16">
+            <path fill-rule="evenodd"
+                  d="M3.1 11.2a.5.5 0 0 1 .4-.2H6a.5.5 0 0 1 0 1H3.75L1.5 15h13l-2.25-3H10a.5.5 0 0 1 0-1h2.5a.5.5 0 0 1 .4.2l3 4a.5.5 0 0 1-.4.8H.5a.5.5 0 0 1-.4-.8z"/>
+            <path fill-rule="evenodd" d="M4 4a4 4 0 1 1 4.5 3.969V13.5a.5.5 0 0 1-1 0V7.97A4 4 0 0 1 4 3.999z"/>
+            <p>location</p>
+
+        </svg>
+    </button>
+    <button class="footer-button back1" onclick="selectButton(this)">
+        <svg xmlns="http://www.w3.org/2000/svg" width="40" height="40" fill="currentColor"
+             class="bi bi-app-indicator"
+             viewBox="0 0 16 16">
+            <path d="M5.5 2A3.5 3.5 0 0 0 2 5.5v5A3.5 3.5 0 0 0 5.5 14h5a3.5 3.5 0 0 0 3.5-3.5V8a.5.5 0 0 1 1 0v2.5a4.5 4.5 0 0 1-4.5 4.5h-5A4.5 4.5 0 0 1 1 10.5v-5A4.5 4.5 0 0 1 5.5 1H8a.5.5 0 0 1 0 1z"/>
+            <path d="M16 3a3 3 0 1 1-6 0 3 3 0 0 1 6 0"/>
+
+        </svg>
+    </button>
+
+    <button class="footer-button" onclick="selectButton(this)">
+        <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" fill="currentColor" class="bi bi-house"
+             viewBox="0 0 16 16">
+            <path d="M8.707 1.5a1 1 0 0 0-1.414 0L.646 8.146a.5.5 0 0 0 .708.708L2 8.207V13.5A1.5 1.5 0 0 0 3.5 15h9a1.5 1.5 0 0 0 1.5-1.5V8.207l.646.647a.5.5 0 0 0 .708-.708L13 5.793V2.5a.5.5 0 0 0-.5-.5h-1a.5.5 0 0 0-.5.5v1.293zM13 7.207V13.5a.5.5 0 0 1-.5.5h-9a.5.5 0 0 1-.5-.5V7.207l5-5z"/>
+            <p>home</p>
+
+        </svg>
+    </button>
+    <button class="footer-button" onclick="selectButton(this)">
+        <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" fill="currentColor"
+             class="bi bi-bar-chart-fill"
+             viewBox="0 0 16 16">
+            <path d="M1 11a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1v3a1 1 0 0 1-1 1H2a1 1 0 0 1-1-1zm5-4a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1v7a1 1 0 0 1-1 1H7a1 1 0 0 1-1-1zm5-5a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1v12a1 1 0 0 1-1 1h-2a1 1 0 0 1-1-1z"/>
+            <p>order</p>
+
+        </svg>
+    </button>
+</div>
+
+
+<script>
+
+    document.addEventListener("DOMContentLoaded", function () {
+        const products = document.querySelectorAll(".product");
+        const hiddenInput = document.getElementById("product-id");
+
+        // افزودن رویداد فوکوس به هر محصول
+        products.forEach(product => {
+            product.addEventListener("focus", () => {
+                const productId = product.getAttribute("data-product-id"); // دریافت آی‌دی محصول از data attribute
+                if (productId) {
+                    hiddenInput.value = productId; // تنظیم مقدار در ورودی مخفی
+                }
+            });
+        });
+
+        // بررسی نهایی هنگام ارسال فرم
+        const confirmBtn = document.getElementById("confirm-btn");
+        confirmBtn.addEventListener("click", (e) => {
+            if (!hiddenInput.value) {
+                e.preventDefault();
+                alert("لطفاً یک محصول را انتخاب کنید.");
+            }
+        });
+    });
+
+    var map;
+    var marker;
+    var selectedLat, selectedLon;
+
+    var map;
+    var marker;
+    var selectedLat, selectedLon;
+
+    function initMap() {
+        map = new L.Map('map', {
+            key: 'web.640eeefb0692499b8bc6b6d73c4d86ef',  // کلید API خود را جایگزین کنید
+            maptype: 'standard-night', // تغییر به دارک مود
+            poi: true,
+            traffic: false,
+            center: [34.6416, 50.8759], // مرکز نقشه به شهر قم
+            zoom: 12
+        });
+        // بررسی وجود مختصات در sessionStorage
+        const savedLat = sessionStorage.getItem('lat');
+        const savedLon = sessionStorage.getItem('lon');
+        if (savedLat && savedLon) {
+            const latlng = [parseFloat(savedLat), parseFloat(savedLon)];
+            marker = L.marker(latlng).addTo(map);
+            map.setView(latlng, 12); // تنظیم نقشه روی مختصات ذخیره‌شده
+        }
+
+        // تنظیم مارکر با دوبار کلیک روی نقشه
+        map.on('dblclick', function (e) {
+            const latlng = e.latlng;
+            const selectedLat = latlng.lat;
+            const selectedLon = latlng.lng;
+
+            document.getElementById('lat').value = selectedLat;
+            document.getElementById('lon').value = selectedLon;
+
+            // ذخیره مختصات در sessionStorage
+            sessionStorage.setItem('lat', selectedLat);
+            sessionStorage.setItem('lon', selectedLon);
+
+            // اضافه کردن یا جابجایی مارکر
+            if (marker) {
+                marker.setLatLng(latlng);
+            } else {
+                marker = L.marker(latlng).addTo(map);
+            }
+        });
+    }
+
+    window.onload = function () {
+        initMap(); // بارگذاری نقشه
+    };
+
+    function selectButton(button) {
+        // Remove 'selected' class from all buttons
+        const buttons = document.querySelectorAll('.footer-button');
+        buttons.forEach(btn => btn.classList.remove('selected'));
+
+        // Add 'selected' class to the clicked button
+        button.classList.add('selected');
+    }
+
+</script>
+<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/js/all.min.js"></script>
+<script src="/fonts/all.js"></script>
+<script src="https://static.neshan.org/sdk/leaflet/v1.9.4/neshan-sdk/v1.0.8/index.js"></script>
+</body>
+</html>
