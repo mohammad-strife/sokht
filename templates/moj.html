@@ -184,7 +184,7 @@
 
         .img1 {
             left: 0;
-            right:30px;
+            right: 30px;
             position: fixed;
 
         }
@@ -200,13 +200,12 @@
         <div class="water-wave3"></div>
     </div>
 </div>
-{% for ord in order %}
 <div class="h2 mx-auto">
-    <h2 class="text-light text-center mx-auto">{% if ord.product_id == 2 %}بنزین سوپر{% elif ord.product_id == 1 %} بنزین معمولی {% else %}اوکتان{% endif %}</h2>
-    <p class="p1">{{ ord.amount }}</p>
-    <p class="p2">{{ ord.quantity }}</p>
+    <h2 class="text-light text-center mx-auto">{% if order.product_id == 2 %}بنزین سوپر{% elif order.product_id == 1 %}
+        بنزین معمولی {% else %}اوکتان{% endif %}</h2>
+    <p class="p1">{{ order.amount }}</p>
+    <p class="p2">  لیتر{{ order.quantity }}</p>
 </div>
-{% endfor %}
 
 <button type="button" class="btn mx-auto btnf btn-dark w-75">Dark</button>
 
