@@ -19,13 +19,14 @@
     </head>
     <body class="bg-slate-700">
         <div class="absolute -left-30 top-8">
+            {% load static %}
             <img
-                src="./images/Frame_25__1_-removebg-preview.png"
+                src="{% static 'images/Frame_25__1_-removebg-preview.png' %}"
                 class="h-32"
             />
         </div>
         <div class="absolute right-0">
-            <img src="./images/Vector 3-Photoroom.png" alt="" />
+            <img src="{% static 'images/Vector 3-Photoroom.png' %}" alt="" />
         </div>
         <div class="container mx-auto">
             <div class="h-screen flex flex-col items-center justify-center gap-8 pt-32">
@@ -34,7 +35,7 @@
                     فشار دهید
                 </p>
                 <div class="w-7/12">
-                    <img src="./images/Frame 36.png" alt=""  class="w-full"/>
+                    <img src="{% static 'images/Frame 36.png' %}" alt=""  class="w-full"/>
                 </div>
                 <button class="p-4 bg-red-500 text-white text-2xl rounded-full w-1/2">
                     فشار دهید
