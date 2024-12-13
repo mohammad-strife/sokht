@@ -170,3 +170,25 @@ def moj(request):
     order = Order.objects.get(user_id=user.id)
     print(order)
     return render(request, 'moj.html', {'order': order})
+
+
+def delete_order(request, order_id):
+    # بررسی اینکه کاربر وارد شده باشد
+    if not request.user.is_authenticated:
+        return JsonResponse({'error': 'لطفاً وارد شوید.'}, status=403)
+
+    try:
+        # دریافت سفارش
+        order = get_object_or_404(Order, id=order_id, user=request.user)
+
+        # حذف سفارش
+        order.delete()
+
+        # بازگشت پاسخ موفق
+        return redirect('client:home')
+    except:
+        print(1111111111111111111111111111111111111111)
+
+
+def emergency(request):
+    return render(request,"emergency.html")

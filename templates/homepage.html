@@ -48,7 +48,6 @@
         }
 
 
-
         .product {
             margin: 10px;
             cursor: pointer;
@@ -193,8 +192,8 @@
         </svg>
     </button>
     <button class="footer-button back1" onclick="selectButton(this)">
-            {% load static %}
-            <img src="{% static 'images/kamion.png' %}" width="40" height="40">
+        {% load static %}
+        <img src="{% static 'images/kamion.png' %}" width="40" height="40">
     </button>
 
     <button class="footer-button button2" onclick="selectButton(this)">
@@ -290,6 +289,24 @@
             }
         });
     }
+
+    document.querySelector('form').addEventListener('submit', function (e) {
+        const latInput = document.getElementById('lat');
+        const lonInput = document.getElementById('lon');
+
+        if (!latInput.value || !lonInput.value) {
+            const savedLat = sessionStorage.getItem('lat');
+            const savedLon = sessionStorage.getItem('lon');
+
+            if (savedLat && savedLon) {
+                latInput.value = savedLat;
+                lonInput.value = savedLon;
+            } else {
+                e.preventDefault(); // جلوگیری از ارسال فرم
+                alert('لطفاً مختصات را تنظیم کنید.');
+            }
+        }
+    });
 
     window.onload = function () {
         initMap(); // بارگذاری نقشه
