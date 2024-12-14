@@ -211,38 +211,51 @@
 </a>
 
 <div class="footer">
-    <button class="footer-button" onclick="selectButton(this)">
+    <a href="https://mohammad24.pythonanywhere.com/auth/"><button class="footer-button" onclick="selectButton(this)">
         <img src="{% static 'images/icons8-login-48.png' %}" height="35" alt="">
         <p>ورودکاربر</p>
-    </button>
-    <button class="footer-button" onclick="selectButton(this)">
+    </button></a>
+    <a href="https://mohammad24.pythonanywhere.com/emergency/"><button class="footer-button" onclick="selectButton(this)">
         <img src="{% static 'images/icons8-emergency-48.png' %}" height="35" alt="">
         <p>امداد</p>
-    </button>
-    <button class="footer-button back1" onclick="selectButton(this)">
-        <a href="http://localhost:8000/"><img src="{% static 'images/icons8-map-64 (1).png' %}" height="35" alt=""></a>
+    </button></a>
+    <a href="https://mohammad24.pythonanywhere.com/"><button class="footer-button back1" onclick="selectButton(this)">
+       <img src="{% static 'images/icons8-map-64 (1).png' %}" height="35" alt="">
 
-    </button>
+    </button></a>
 
-    <button class="footer-button" onclick="selectButton(this)">
+    
+    <a href="https://mohammad24.pythonanywhere.com/moj/"><button class="footer-button" onclick="selectButton(this)">
         <img src="{% static 'images/icons8-waiting-48.png' %}" height="35" alt="">
         <p>انتظار</p>
 
-    </button>
-    <button class="footer-button" onclick="selectButton(this)">
+    </button></a>
+    <a href="https://mohammad24.pythonanywhere.com/order/"><button class="footer-button" onclick="selectButton(this)">
         <img src="{% static 'images/icons8-order-48.png' %}" height="35" alt="">
         <p>سفارشات</p>
-    </button>
+    </button></a>
 </div>
 
 <div class="img1 mx-auto">
     <a href=""><img src="{% static 'images/logon.png' %}" class="img1 mx-auto" style="width: 200px;"></a>
 </div>
 
-
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 <script src=" https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js"></script>
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/js/all.min.js"></script>
+  <script>
+        // چک می‌کنیم که آیا پیامی از سرور ارسال شده است
+        const msg = "{{ msg|escapejs }}";
+        if (msg) {
+            Swal.fire({
+                title: 'پیام',
+                text: msg,
+                icon: 'info', // می‌توانید 'success' یا 'error' هم استفاده کنید
+                confirmButtonText: 'باشه'
+            });
+        }
+    </script>
 </body>
 </html>

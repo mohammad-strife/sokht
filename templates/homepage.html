@@ -76,6 +76,14 @@
             color: white;
         }
 
+        button {
+            background: none;
+            border: none;
+            color: white;
+            z-index: 100;
+            margin-top: 20px;
+        }
+
 
         .container_mobile {
             justify-content: center;
@@ -104,25 +112,6 @@
         }
 
 
-        .button2:focus {
-            outline: none;
-            border: none;
-            background: none;
-        }
-
-        .button2 {
-            background: none;
-            border: none;
-            color: white;
-            z-index: 100;
-            margin-top: 20px;
-        }
-
-        .button2:hover {
-            border: none;
-            background: none;
-        }
-
         .mahsolat {
             display: flex;
             flex-direction: column;
@@ -131,18 +120,12 @@
         }
 
         .back1 {
-            background: linear-gradient(to right, #CF9845, #A512EA);
+            background: #2f2f2f;
             padding: 15px;
-            border: 1px solid white;
             border-radius: 50%;
             margin-bottom: 55px;
-            color: white;
         }
 
-        a.nav-link:link {
-            color: #fb3f00;
-            text-decoration: none;
-        }
 
     </style>
 <body>
@@ -176,31 +159,52 @@
         </div>
     </div>
 </form>
-</div>
+
 <div class="footer">
-    <button class="footer-button" onclick="selectButton(this)">
+    <a href="https://mohammad24.pythonanywhere.com/auth/"><button class="footer-button" onclick="selectButton(this)">
         <img src="{% static 'images/icons8-login-48.png' %}" height="35" alt="">
         <p>ورودکاربر</p>
-    </button>
-    <button class="footer-button" onclick="selectButton(this)">
+    </button></a>
+    <a href="https://mohammad24.pythonanywhere.com/emergency/"><button class="footer-button" onclick="selectButton(this)">
         <img src="{% static 'images/icons8-emergency-48.png' %}" height="35" alt="">
         <p>امداد</p>
-    </button>
-    <button class="footer-button back1" onclick="selectButton(this)">
-        <a href="http://localhost:8000/"><img src="{% static 'images/icons8-map-64 (1).png' %}" height="35" alt=""></a>
+    </button></a>
+    <a href="https://mohammad24.pythonanywhere.com/"><button class="footer-button back1" onclick="selectButton(this)">
+       <img src="{% static 'images/icons8-map-64 (1).png' %}" height="35" alt="">
 
-    </button>
+    </button></a>
 
-    <button class="footer-button" onclick="selectButton(this)">
+    <a href="https://mohammad24.pythonanywhere.com/moj/"><button class="footer-button" onclick="selectButton(this)">
         <img src="{% static 'images/icons8-waiting-48.png' %}" height="35" alt="">
         <p>انتظار</p>
 
-    </button>
-    <button class="footer-button" onclick="selectButton(this)">
+    </button></a>
+    <a href="https://mohammad24.pythonanywhere.com/order/"><button class="footer-button" onclick="selectButton(this)">
         <img src="{% static 'images/icons8-order-48.png' %}" height="35" alt="">
         <p>سفارشات</p>
-    </button>
+    </button></a>
 </div>
+
+
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/js/all.min.js"></script>
+<script src="https://static.neshan.org/sdk/leaflet/v1.9.4/neshan-sdk/v1.0.8/index.js"></script>
+
+<script>
+    // چک می‌کنیم که آیا پیامی از سرور ارسال شده است
+    const msg = "{{ msg|escapejs }}";
+    if (msg) {
+        Swal.fire({
+            title: 'پیام',
+            text: msg,
+            icon: 'info', // می‌توانید 'success' یا 'error' هم استفاده کنید
+            confirmButtonText: 'باشه'
+        });
+    }
+</script>
 <script>
 
     document.addEventListener("DOMContentLoaded", function () {
@@ -289,11 +293,7 @@
     }
 
 </script>
-<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js"></script>
-<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/js/all.min.js"></script>
-<script src="/fonts/all.js"></script>
-<script src="https://static.neshan.org/sdk/leaflet/v1.9.4/neshan-sdk/v1.0.8/index.js"></script>
+
+
 </body>
 </html>

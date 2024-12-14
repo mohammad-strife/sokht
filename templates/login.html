@@ -22,56 +22,89 @@
     <img src="{% static 'images/Vector 3-Photoroom.png' %}" id="ko" alt=""/>
 </div>
 
-<div class="container mx-auto">
-    <div
-            class="h-screen flex flex-col items-center justify-center text-white"
-    >
-        <div class="space-y-5 mb-10 text-center">
-            <p class="text-4xl font-bold">خوش‌ آمدید</p>
-            <p>ثبت نام و ورود</p>
+
+
+{% if user.is_authenticated %}
+
+    <div class="container mx-auto">
+        <div class="h-screen flex flex-col items-center justify-center text-white">
+            <div class="space-y-5 mb-10 text-center">
+                <p class="text-4xl font-bold">خوش‌ آمدید</p>
+            </div>
+            <div><p>
+                 شما در حال حاضر با کد ملی {{ user.username }}لاگین هستید
+            </p></div>
+            <a href="https://mohammad24.pythonanywhere.com/logout/"><botton>خروج از حساب</botton></a>
+            <p class="text-white absolute bottom-10">تمامی حقوق محفوظ است</p>
         </div>
-        <form method="post" action="{% url 'client:auth' %}" class="flex flex-col gap-7">
-            {% csrf_token %}
-
-            <div class="relative">
-                <input
-                        type="number"
-                        class="rounded-full p-2 px-9 text-right text-black" name="n_code"
-                        placeholder="کدملی"
-                        maxlength="10"
-                />
-                <i
-                        class="fa-solid fa-user fa-md text-gray-600 absolute right-3 top-3"
-                ></i>
-            </div>
-            <div class="relative">
-                <input
-                        type="number"
-                        class="rounded-full p-2 px-9 text-right text-black" name="phone"
-                        placeholder="شماره تلفن"
-                        maxlength="11"
-                        
-                />
-                <i
-                        class="fa-solid fa-lock fa-md text-gray-600 absolute right-3 top-3"
-                ></i>
-            </div>
-
-            <div class="text-right">
-                <button
-                        class="w-2/6 bg-white px-7 py-2 rounded-full bg-gradient-to-r from-indigo-500 via-purple-500 to-pink-500 mt-5"
-                        type="submit"
-                >
-                    <i
-                            class="fa-solid fa-arrow-right fa-xl text-white"
-                    ></i>
-                </button>
-            </div>
-        </form>
-        <p class="text-white absolute bottom-10">تمامی حقوق محفوظ است</p>
     </div>
-</div>
-<script src="https://cdn.tailwindcss.com"></script>
+{% else %}
 
+    <div class="container mx-auto">
+        <div class="h-screen flex flex-col items-center justify-center text-white">
+            <div class="space-y-5 mb-10 text-center">
+                <p class="text-4xl font-bold">خوش‌ آمدید</p>
+                <p>ثبت نام و ورود</p>
+            </div>
+            <form method="post" action="{% url 'client:auth' %}" class="flex flex-col gap-7">
+                {% csrf_token %}
+
+                <div class="relative">
+                    <input
+                            type="number"
+                            class="rounded-full p-2 px-9 text-right text-black" name="n_code"
+                            placeholder="کدملی"
+                            maxlength="10"
+                    />
+                    <i
+                            class="fa-solid fa-user fa-md text-gray-600 absolute right-3 top-3"
+                    ></i>
+                </div>
+                <div class="relative">
+                    <input
+                            type="number"
+                            class="rounded-full p-2 px-9 text-right text-black" name="phone"
+                            placeholder="شماره تلفن"
+                            maxlength="11"
+
+                    />
+                    <i
+                            class="fa-solid fa-lock fa-md text-gray-600 absolute right-3 top-3"
+                    ></i>
+                </div>
+
+                <div class="text-right">
+                    <button
+                            class="w-2/6 bg-white px-7 py-2 rounded-full bg-gradient-to-r from-indigo-500 via-purple-500 to-pink-500 mt-5"
+                            type="submit"
+                    >
+                        <i
+                                class="fa-solid fa-arrow-right fa-xl text-white"
+                        ></i>
+                    </button>
+                </div>
+            </form>
+            <p class="text-white absolute bottom-10">تمامی حقوق محفوظ است</p>
+        </div>
+    </div>
+{% endif %}
+<!--                  -->
+
+<!--                  -->
+
+<script src="https://cdn.tailwindcss.com"></script>
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+<script>
+    // چک می‌کنیم که آیا پیامی از سرور ارسال شده است
+    const msg = "{{ msg|escapejs }}";
+    if (msg) {
+        Swal.fire({
+            title: 'پیام',
+            text: msg,
+            icon: 'info', // می‌توانید 'success' یا 'error' هم استفاده کنید
+            confirmButtonText: 'باشه'
+        });
+    }
+</script>
 </body>
 </html>
