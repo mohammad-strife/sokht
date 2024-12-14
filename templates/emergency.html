@@ -1,47 +1,92 @@
 <!DOCTYPE html>
 <html lang="en">
-    <head>
-        <meta charset="UTF-8" />
-        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-        <title>Document</title>
-        <link
+<head>
+    <meta charset="UTF-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <title>Document</title>
+    <link
             href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css"
             rel="stylesheet"
-        />
-        <link
+    />
+    <link
             rel="stylesheet"
             href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css"
             integrity="sha512-9usAa10IRO0HhonpyAIVpjrylPvoDwiPUiKdWk5t3PyolY1cOd4DSE0Ga+ri4AuTroPR5aQvXU9xC6qOPnzFeg=="
             crossorigin="anonymous"
             referrerpolicy="no-referrer"
-        />
-        <script src="https://cdn.tailwindcss.com"></script>
-    </head>
-    <body class="bg-slate-700">
-        <div class="absolute -left-30 top-8">
-            {% load static %}
-            <img
-                src="{% static 'images/Frame_25__1_-removebg-preview.png' %}"
-                class="h-32"
-            />
+    />
+    <style>
+          .footer {
+            border-top-right-radius: 40px;
+            border-top-left-radius: 40px;
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background-image: linear-gradient(179.6deg, rgb(194, 135, 97) 0.2%, rgb(116, 110, 141) 99.8%);
+            -webkit-backdrop-filter: blur(30px);
+            backdrop-filter: blur(30px);
+            height: 67px;
+            width: 100%; /* Fixed height for footer */
+            display: flex;
+            justify-content: space-around;
+            align-items: center;
+            z-index: 100;
+            border: 1px solid white;
+        }
+    </style>
+    <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="bg-slate-700">
+<div class="absolute -left-30 top-8">
+    {% load static %}
+    <img
+            src="{% static 'images/Frame_25__1_-removebg-preview.png' %}"
+            class="h-32"
+    />
+</div>
+<div class="absolute right-0">
+    <img src="{% static 'images/Vector 3-Photoroom.png' %}" alt=""/>
+</div>
+<div class="container mx-auto">
+    <div class="h-screen flex flex-col items-center justify-center gap-8 pt-32">
+        <p class="w-2/3 text-center text-white">
+            توجه: برای استفاده از خدمات بنزین اضطراری لطفا دکمه زیر را
+            فشار دهید
+        </p>
+        <div class="w-7/12">
+            <img src="{% static 'images/Frame 36.png' %}" alt="" class="w-full"/>
         </div>
-        <div class="absolute right-0">
-            <img src="{% static 'images/Vector 3-Photoroom.png' %}" alt="" />
-        </div>
-        <div class="container mx-auto">
-            <div class="h-screen flex flex-col items-center justify-center gap-8 pt-32">
-                <p class="w-2/3 text-center text-white">
-                    توجه: برای استفاده از خدمات بنزین اضطراری لطفا دکمه زیر را
-                    فشار دهید
-                </p>
-                <div class="w-7/12">
-                    <img src="{% static 'images/Frame 36.png' %}" alt=""  class="w-full"/>
-                </div>
-                <button class="p-4 bg-red-500 text-white text-2xl rounded-full w-1/2">
-                    فشار دهید
-                    <i class="fa-solid fa-phone"></i>
-                </button>
-            </div>
-        </div>
-    </body>
+        <button class="p-4 bg-red-500 text-white text-2xl rounded-full w-1/2">
+            فشار دهید
+            <i class="fa-solid fa-phone"></i>
+        </button>
+    </div>
+</div>
+<div class="footer">
+    <button class="footer-button" onclick="selectButton(this)">
+        <img src="{% static 'images/icons8-login-48.png' %}" height="35" alt="">
+        <p>ورودکاربر</p>
+    </button>
+    <button class="footer-button" onclick="selectButton(this)">
+        <img src="{% static 'images/icons8-emergency-48.png' %}" height="35" alt="">
+        <p>امداد</p>
+    </button>
+    <button class="footer-button back1" onclick="selectButton(this)">
+        <a href="http://localhost:8000/"><img src="{% static 'images/icons8-map-64 (1).png' %}" height="35" alt=""></a>
+
+    </button>
+
+    <button class="footer-button" onclick="selectButton(this)">
+        <img src="{% static 'images/icons8-waiting-48.png' %}" height="35" alt="">
+        <p>انتظار</p>
+
+    </button>
+    <button class="footer-button" onclick="selectButton(this)">
+        <img src="{% static 'images/icons8-order-48.png' %}" height="35" alt="">
+        <p>سفارشات</p>
+    </button>
+</div>
+
+</body>
 </html>
