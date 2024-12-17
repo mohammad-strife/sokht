@@ -11,10 +11,158 @@
             crossorigin="anonymous"
             referrerpolicy="no-referrer"
     />
+    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
     <link
             href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet"/>
     {% load static %}
     <link rel="stylesheet" href="{% static 'css/main.css' %}"/>
+    <style>
+        .Btn {
+            display: flex;
+            align-items: center;
+            justify-content: flex-start;
+            width: 45px;
+            height: 45px;
+            border: none;
+            border-radius: 50%;
+            cursor: pointer;
+            position: relative;
+            overflow: hidden;
+            transition-duration: .3s;
+            box-shadow: 2px 2px 10px rgba(0, 0, 0, 0.199);
+            background-color: rgb(255, 65, 65);
+        }
+
+        /* plus sign */
+        .sign {
+            width: 100%;
+            transition-duration: .3s;
+            display: flex;
+            align-items: end;
+            justify-content: end;
+        }
+
+        .sign svg {
+            width: 17px;
+        }
+
+        .sign svg path {
+            fill: white;
+        }
+
+        /* text */
+        .text {
+            position: absolute;
+            right: 0%;
+            width: 0%;
+            opacity: 0;
+            color: white;
+            font-size: 1.2em;
+            font-weight: 600;
+            transition-duration: .3s;
+        }
+
+        /* hover effect on button width */
+        .Btn:hover .sign {
+            width: 30%;
+            transition-duration: .3s;
+            padding-left: 20px;
+        }
+
+        /* hover effect button's text */
+        .Btn:hover .text {
+            opacity: 1;
+            width: 70%;
+            transition-duration: .3s;
+            padding-right: 10px;
+        }
+
+        /* button click effect*/
+        .Btn:active {
+            transform: translate(2px, 2px);
+        }
+
+        .card {
+            max-width: 320px;
+            border-radius: 1rem;
+            background-color: rgb(42, 51, 63);
+            padding: 1rem;
+        }
+
+        .infos {
+            display: flex;
+            flex-direction: row;
+            align-items: flex-start;
+            grid-gap: 1rem;
+            gap: 1rem;
+        }
+
+        .image {
+            height: 7rem;
+            width: 7rem;
+            border-radius: 0.5rem;
+            background-color: rgb(7, 7, 65);
+            background: linear-gradient(to bottom right, rgb(15, 11, 54), rgb(43, 67, 103));
+        }
+
+        .info {
+            height: 7rem;
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+        }
+
+        .flex {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            margin: 0 4px;
+        }
+
+        .state-value {
+            font-weight: 700;
+            color: rgb(118, 36, 194);
+        }
+
+        .request {
+            margin-top: 1.5rem;
+            width: 100%;
+            border: 1px solid transparent;
+            border-radius: 0.5rem;
+            padding: 0.5rem 1rem;
+            font-size: 1rem;
+            line-height: 1.5rem;
+            transition: all .3s ease;
+            color: white;
+            background: #ff6961;
+        }
+
+        .request:hover {
+            background-color: rgb(118, 36, 194);
+            color: #fff;
+        }
+
+        .button3 {
+            cursor: pointer;
+            font-size: large;
+            font-family: inherit;
+            font-weight: bold;
+            color: #0011ff;
+            background-color: #f8f8fd;
+            border-radius: 40px;
+            border: 6px solid #8b93f8;
+            box-shadow: 0px 8px #1f35ff;
+        }
+
+        .button3:active {
+            position: relative;
+            top: 8px;
+            border: 6px solid #646fff;
+            box-shadow: 0px 0px;
+        }
+
+    </style>
 </head>
 <body class="bg-slate-800">
 <div class="absolute left-0">
@@ -31,10 +179,27 @@
             <div class="space-y-5 mb-10 text-center">
                 <p class="text-4xl font-bold">خوش‌ آمدید</p>
             </div>
-            <div><p>
-                 شما در حال حاضر با کد ملی {{ user.username }}لاگین هستید
-            </p></div>
-            <a href="https://mohammad24.pythonanywhere.com/logout/"><botton>خروج از حساب</botton></a>
+            <div class="card">
+                <div class="infos">
+                    <div class="image">
+                        <svg class="w-16 h-16 mx-auto mt-5" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24"
+                             fill="none"
+                             xmlns="http://www.w3.org/2000/svg">
+                            <path d="M17.982 18.725A7.488 7.488 0 0012 15.75a7.488 7.488 0 00-5.982 2.975m11.963 0a9 9 0 10-11.963 0m11.963 0A8.966 8.966 0 0112 21a8.966 8.966 0 01-5.982-2.275M15 9.75a3 3 0 11-6 0 3 3 0 016 0z"
+                                  stroke-linejoin="round" stroke-linecap="round"></path>
+                        </svg>
+                    </div>
+                    <div class="info">
+                        <button class="button3 text-center mt-5" style="height: 73px"> کد ملی شما {{ user.username }}
+                        </button>
+                    </div>
+                </div>
+                <a href="https://mohammad24.pythonanywhere.com/logout/">
+                    <button class="request text-center" type="button">
+                        <p class="text-center">خروج از حساب</p>
+                    </button>
+                </a>
+            </div>
             <p class="text-white absolute bottom-10">تمامی حقوق محفوظ است</p>
         </div>
     </div>
@@ -94,6 +259,7 @@
 
 <script src="https://cdn.tailwindcss.com"></script>
 <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 <script>
     // چک می‌کنیم که آیا پیامی از سرور ارسال شده است
     const msg = "{{ msg|escapejs }}";

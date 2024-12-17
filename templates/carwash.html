@@ -1,0 +1,446 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <title>Document</title>
+    <link
+            rel="stylesheet"
+            href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css"
+            integrity="sha512-9usAa10IRO0HhonpyAIVpjrylPvoDwiPUiKdWk5t3PyolY1cOd4DSE0Ga+ri4AuTroPR5aQvXU9xC6qOPnzFeg=="
+            crossorigin="anonymous"
+            referrerpolicy="no-referrer"
+    />
+    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <link rel="stylesheet" href="https://static.neshan.org/sdk/leaflet/v1.9.4/neshan-sdk/v1.0.8/index.css"/>
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+    <link
+            href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet"/>
+
+    <title>Title</title>
+</head>
+<style>
+    html, body {
+        height: 100%;
+        margin: 0;
+        padding: 0;
+        background: #20252E;
+        overflow: hidden;
+    }
+
+    .container_mobile {
+        justify-content: center;
+        align-items: center;
+    {#height: 100vh;#} width: 100vw;
+
+    }
+
+    /* From Uiverse.io by Shoh2008 */
+    .loader {
+        width: 90px;
+        height: 110px;
+        background-color: #fff;
+        background-repeat: no-repeat;
+        background-image: linear-gradient(#ddd 50%, #bbb 51%),
+        linear-gradient(#ddd, #ddd), linear-gradient(#ddd, #ddd),
+        radial-gradient(ellipse at center, #aaa 25%, #eee 26%, #eee 50%, #0000 55%),
+        radial-gradient(ellipse at center, #aaa 25%, #eee 26%, #eee 50%, #0000 55%),
+        radial-gradient(ellipse at center, #aaa 25%, #eee 26%, #eee 50%, #0000 55%);
+        background-position: 0 20px, 45px 0, 8px 6px, 55px 3px, 75px 3px, 95px 3px;
+        background-size: 100% 4px, 1px 23px, 30px 8px, 15px 15px, 15px 15px, 15px 15px;
+        position: relative;
+        border-radius: 6%;
+        animation: shake 3s ease-in-out infinite;
+        transform-origin: 60px 180px;
+    }
+
+    .loader:before {
+        content: "";
+        position: absolute;
+        left: 5px;
+        top: 100%;
+        width: 7px;
+        height: 5px;
+        border-radius: 0 0 4px 4px;
+    }
+
+    .loader:after {
+        content: "";
+        position: absolute;
+        width: 65px;
+        height: 65px;
+        left: 0;
+        right: 0;
+        margin: auto;
+        bottom: 10px;
+        background-color: #bbdefb;
+        background-image: linear-gradient(to right, #0004 0%, #0004 49%, #0000 50%, #0000 100%),
+        linear-gradient(135deg, #64b5f6 50%, #607d8b 51%);
+        background-size: 30px 100%, 90px 80px;
+        border-radius: 50%;
+        background-repeat: repeat, no-repeat;
+        background-position: 0 0;
+        box-sizing: border-box;
+        border: 10px solid #DDD;
+        box-shadow: 0 0 0 4px #999 inset, 0 0 6px 6px #0004 inset;
+        animation: spin 3s ease-in-out infinite;
+
+    }
+
+    @keyframes spin {
+        0% {
+            transform: rotate(0deg)
+        }
+
+        50% {
+            transform: rotate(360deg)
+        }
+
+        75% {
+            transform: rotate(750deg)
+        }
+
+        100% {
+            transform: rotate(1800deg)
+        }
+    }
+
+    @keyframes shake {
+        65%, 80%, 88%, 96% {
+            transform: rotate(0.5deg)
+        }
+
+        50%, 75%, 84%, 92% {
+            transform: rotate(-0.5deg)
+        }
+
+        0%, 50%, 100% {
+            transform: rotate(0)
+        }
+    }
+
+    /* From Uiverse.io by Allyhere */
+    .btn-donate {
+        --clr-font-main: hsla(0 0% 20% / 100);
+        --btn-bg-1: hsla(194 100% 69% / 1);
+        --btn-bg-2: hsla(217 100% 56% / 1);
+        --btn-bg-color: hsla(360 100% 100% / 1);
+        --radii: 0.5em;
+        cursor: pointer;
+        width: 120px;
+        height: 44px;
+        font-weight: 500;
+        transition: 0.8s;
+        background-size: 280% auto;
+        background-image: linear-gradient(
+                325deg,
+                var(--btn-bg-2) 0%,
+                var(--btn-bg-1) 55%,
+                var(--btn-bg-2) 90%
+        );
+        border: none;
+        border-radius: var(--radii);
+        color: var(--btn-bg-color);
+        box-shadow: 0px 0px 20px rgba(71, 184, 255, 0.5),
+        0px 5px 5px -1px rgba(58, 125, 233, 0.25),
+        inset 4px 4px 8px rgba(175, 230, 255, 0.5),
+        inset -4px -4px 8px rgba(19, 95, 216, 0.35);
+    }
+
+    .btn-donate1 {
+        --clr-font-main: hsla(0 0% 20% / 100);
+        --btn-bg-1: hsla(194 100% 69% / 1);
+        --btn-bg-2: hsla(217 100% 56% / 1);
+        --btn-bg-color: hsla(360 100% 100% / 1);
+        --radii: 0.5em;
+        cursor: pointer;
+        width: 100px;
+        height: 34px;
+        font-weight: 500;
+        transition: 0.8s;
+        background-size: 280% auto;
+        background-image: linear-gradient(
+                325deg,
+                var(--btn-bg-2) 0%,
+                var(--btn-bg-1) 55%,
+                var(--btn-bg-2) 90%
+        );
+        border: none;
+        border-radius: var(--radii);
+        color: var(--btn-bg-color);
+        box-shadow: 0px 0px 20px rgba(71, 184, 255, 0.5),
+        0px 5px 5px -1px rgba(58, 125, 233, 0.25),
+        inset 4px 4px 8px rgba(175, 230, 255, 0.5),
+        inset -4px -4px 8px rgba(19, 95, 216, 0.35);
+    }
+
+    .btn-donate:hover {
+        background-position: right top;
+    }
+
+    .btn-donate:is(:focus, :focus-visible, :active) {
+        outline: none;
+        box-shadow: 0 0 0 3px var(--btn-bg-color),
+        0 0 0 6px var(--btn-bg-2);
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+        .btn-donate {
+            transition: linear;
+        }
+    }
+
+    /* From Uiverse.io by mrhyddenn */
+    .card1 {
+        width: 240px;
+        height: 130px;
+        background: #ffff;
+        box-shadow: 0 1px 25px rgba(0, 0, 0, 0.2);
+        align-items: center;
+        justify-content: center;
+        padding: 12px 10px;
+
+    }
+
+    .card1_load {
+        width: 100px;
+        height: 100px;
+        float: left;
+        border-radius: 50%;
+        background-size: 200% 100%;
+        background-position: 100% 0;
+        animation: load89234 2s infinite;
+    }
+
+    .card1_load_extreme_title {
+        width: 110px;
+        height: 50px;
+        position: relative;
+        float: right;
+        border-radius: 5px;
+        background: linear-gradient(120deg, #e5e5e5 30%, #f0f0f0 38%, #f0f0f0 40%, #e5e5e5 48%);
+        background-size: 200% 100%;
+        background-position: 100% 0;
+        animation: load89234 2s infinite;
+    }
+
+
+    @keyframes load89234 {
+        100% {
+            background-position: -100% 0;
+        }
+    }
+
+    /* From Uiverse.io by vinodjangid07 */
+    .card21 {
+        width: 240px;
+        height: 230px;
+        background-color: rgb(255, 255, 255);
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        padding: 20px 30px;
+        gap: 13px;
+        overflow: hidden;
+        box-shadow: 2px 2px 20px rgba(0, 0, 0, 0.062);
+    }
+
+    #cookieSvg {
+        width: 50px;
+    }
+
+    #cookieSvg g path {
+        fill: rgb(97, 81, 81);
+    }
+
+    .cookieHeading {
+        font-size: 1.2em;
+        font-weight: 800;
+        color: rgb(26, 26, 26);
+    }
+
+    .cookieDescription {
+        text-align: center;
+        font-size: 0.7em;
+        font-weight: 600;
+        color: rgb(99, 99, 99);
+    }
+
+    .buttonContainer {
+        display: flex;
+        gap: 20px;
+        flex-direction: row;
+    }
+
+    .acceptButton {
+        width: 80px;
+        height: 30px;
+        background-color: #7b57ff;
+        transition-duration: .2s;
+        border: none;
+        color: rgb(241, 241, 241);
+        cursor: pointer;
+        font-weight: 600;
+        border-radius: 20px;
+    }
+
+    .declineButton {
+        width: 80px;
+        height: 30px;
+        background-color: rgb(218, 218, 218);
+        transition-duration: .2s;
+        color: rgb(46, 46, 46);
+        border: none;
+        cursor: pointer;
+        font-weight: 600;
+        border-radius: 20px;
+    }
+
+    .declineButton:hover {
+        background-color: #ebebeb;
+        transition-duration: .2s;
+    }
+
+    .acceptButton:hover {
+        background-color: #9173ff;
+        transition-duration: .2s;
+    }
+
+    button:focus {
+        border: none;
+        outline: none;
+    }
+
+    .footer {
+        border-top-right-radius: 40px;
+        border-top-left-radius: 40px;
+        position: fixed;
+        bottom: 0;
+        left: 0;
+        right: 0;
+        -webkit-backdrop-filter: blur(30px);
+        backdrop-filter: blur(30px);
+        height: 67px;
+        width: 100%; /* Fixed height for footer00BFFFFF */
+        display: flex;
+        justify-content: space-around;
+        align-items: center;
+        z-index: 100;
+        border: 1px solid white;
+    }
+
+    .footer-button {
+        display: flex;
+        justify-content: center;
+        flex-direction: column;
+        align-items: center;
+    }
+
+    button {
+        background: none;
+        border: none;
+        color: white;
+        z-index: 100;
+    }
+
+    button:hover {
+        border: none;
+        background: none;
+    }
+
+
+    .back1 {
+        background: #2f2f2f;
+        padding: 15px;
+        border-radius: 50%;
+        margin-bottom: 55px;
+    }
+
+</style>
+
+<body>
+<section>
+    <div class="w-100 bg-primary" style="height: 150px;border-bottom-left-radius: 120px">
+        <p class="text-light text-right p-2">ماشینتو بدون دردسر تمیز کن</p>
+        <h3 class="text-light text-right p-2">هرجا باشی تمیزت میکنیم</h3>
+        <button class="btn-donate float-right" style="margin-right: 8px">درخواست بده</button>
+    </div>
+    <div class="loader" style="margin-top: -100px;left: 20px;border: 1px solid deepskyblue"></div>
+</section>
+<div class="container_mobile">
+    <section>
+        <div class="card1 mx-auto mt-5">
+            <div class="card1_load">
+                <img src="{% static 'images/carwashi.png' %}">
+            </div>
+            <div class="card1_load_extreme_title mt-2">
+                <p class="text-right" style="font-size: 10px">سریعا کارواش آنلاین بگیر تا دیگه نخوای وقتتو توی کارواش
+                    هدر
+                    بدی</p>
+            </div>
+            <button class="btn-donate1 float-right mt-2" style="margin-right: 8px">درخواست بده</button>
+        </div>
+    </section>
+    <section>
+        <div class="card21 mx-auto mt-3">
+            <img style="border-radius: 10px;height: 50px;" src="{% static 'images/tamir.png' %} ">
+            <p class="cookieHeading">مکانیک آنلاین هم داریم</p>
+            <p class="cookieDescription">هر جا و هرموقع گیر کردی کافیه اینجا درخواست مکانیک آنلاین بدی تا سریعا بیاد
+                سراغت</p>
+
+            <div class="buttonContainer">
+                <button class="acceptButton">مکانیک</button>
+                <button class="declineButton">بنزین</button>
+            </div>
+        </div>
+    </section>
+    <section>
+        <div class="footer bg-primary">
+            <a href="https://mohammad24.pythonanywhere.com/auth/">
+                <button class="footer-button text-light" onclick="selectButton(this)">
+                    <img src="{% static 'images/icons8-login-48.png' %}" height="35" alt="" style="height: 35px">
+                    <p>ورودکاربر</p>
+                </button>
+            </a>
+            <a href="https://mohammad24.pythonanywhere.com/emergency/">
+                <button class="footer-button text-light" onclick="selectButton(this)">
+                    <img src="{% static 'images/icons8-emergency-48.png' %}" height="35" alt="" style="height: 35px">
+                    <p>امداد</p>
+                </button>
+            </a>
+            <a href="https://mohammad24.pythonanywhere.com/">
+                <button class="footer-button back1" onclick="selectButton(this)">
+                    <img src="{% static 'images/icons8-map-64 (1).png' %}" height="35" alt="" style="height: 35px">
+
+                </button>
+            </a>
+
+            <a href="https://mohammad24.pythonanywhere.com/moj/">
+                <button class="footer-button text-light" onclick="selectButton(this)">
+                    <img src="{% static 'images/icons8-waiting-48.png' %}" height="35" alt="" style="height: 35px">
+                    <p>انتظار</p>
+
+                </button>
+            </a>
+            <a href="https://mohammad24.pythonanywhere.com/order/">
+                <button class="footer-button text-light" onclick="selectButton(this)">
+                    <img src="{% static 'images/icons8-order-48.png' %}" height="35" alt="" style="height: 35px">
+                    <p>سفارشات</p>
+                </button>
+            </a>
+        </div>
+    </section>
+</div>
+<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/js/all.min.js"></script>
+<script src="/fonts/all.js"></script>
+<script src="https://static.neshan.org/sdk/leaflet/v1.9.4/neshan-sdk/v1.0.8/index.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
+</body>
+</html>

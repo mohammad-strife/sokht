@@ -111,6 +111,10 @@
             border: 1px solid white;
         }
 
+        button:focus {
+            border: none;
+            outline: none;
+        }
 
         .mahsolat {
             display: flex;
@@ -125,7 +129,6 @@
             border-radius: 50%;
             margin-bottom: 55px;
         }
-
 
     </style>
 <body>
@@ -161,28 +164,38 @@
 </form>
 
 <div class="footer">
-    <a href="https://mohammad24.pythonanywhere.com/auth/"><button class="footer-button" onclick="selectButton(this)">
-        <img src="{% static 'images/icons8-login-48.png' %}" height="35" alt="">
-        <p>ورودکاربر</p>
-    </button></a>
-    <a href="https://mohammad24.pythonanywhere.com/emergency/"><button class="footer-button" onclick="selectButton(this)">
-        <img src="{% static 'images/icons8-emergency-48.png' %}" height="35" alt="">
-        <p>امداد</p>
-    </button></a>
-    <a href="https://mohammad24.pythonanywhere.com/"><button class="footer-button back1" onclick="selectButton(this)">
-       <img src="{% static 'images/icons8-map-64 (1).png' %}" height="35" alt="">
+    <a href="https://mohammad24.pythonanywhere.com/auth/">
+        <button class="footer-button" onclick="selectButton(this)">
+            <img src="{% static 'images/icons8-login-48.png' %}" height="35" alt="">
+            <p>ورودکاربر</p>
+        </button>
+    </a>
+    <a href="https://mohammad24.pythonanywhere.com/emergency/">
+        <button class="footer-button" onclick="selectButton(this)">
+            <img src="{% static 'images/icons8-emergency-48.png' %}" height="35" alt="">
+            <p>امداد</p>
+        </button>
+    </a>
+    <a href="https://mohammad24.pythonanywhere.com/">
+        <button class="footer-button back1" onclick="selectButton(this)">
+            <img src="{% static 'images/icons8-map-64 (1).png' %}" height="35" alt="">
 
-    </button></a>
+        </button>
+    </a>
 
-    <a href="https://mohammad24.pythonanywhere.com/moj/"><button class="footer-button" onclick="selectButton(this)">
-        <img src="{% static 'images/icons8-waiting-48.png' %}" height="35" alt="">
-        <p>انتظار</p>
+    <a href="https://mohammad24.pythonanywhere.com/moj/">
+        <button class="footer-button" onclick="selectButton(this)">
+            <img src="{% static 'images/icons8-waiting-48.png' %}" height="35" alt="">
+            <p>انتظار</p>
 
-    </button></a>
-    <a href="https://mohammad24.pythonanywhere.com/order/"><button class="footer-button" onclick="selectButton(this)">
-        <img src="{% static 'images/icons8-order-48.png' %}" height="35" alt="">
-        <p>سفارشات</p>
-    </button></a>
+        </button>
+    </a>
+    <a href="https://mohammad24.pythonanywhere.com/order/">
+        <button class="footer-button" onclick="selectButton(this)">
+            <img src="{% static 'images/icons8-order-48.png' %}" height="35" alt="">
+            <p>سفارشات</p>
+        </button>
+    </a>
 </div>
 
 
