@@ -20,6 +20,15 @@
             overflow: hidden;
         }
 
+        #loading-video {
+            position: absolute;
+            top: 0;
+            left: 0;
+            height: 100%;
+            width: 100%;
+            z-index: 10; /* Ensure the video is on top */
+        }
+
         #map {
             height: 100%; /* Relative height */
             width: 100%; /* Relative width */
@@ -130,11 +139,19 @@
             margin-bottom: 55px;
         }
 
+
     </style>
 <body>
 <form method="post" action="{% url 'time' %}">
-    <div style="height: 37vh; width: 100%;">
+    <div style="height: 37vh; width: 100%; position: relative;">
         <div id="map"></div>
+        <div>
+            <video style="margin-top: -15px" id="loading-video" autoplay muted>
+                {% load static %}
+                <source src="{% static 'images/homepagevideo.mp4' %}" type="video/mp4"> <!-- مسیر ویدیو -->
+                Your browser does not support the video tag.
+            </video>
+        </div>
     </div>
     {% csrf_token %}
     <input type="hidden" id="lat" name="lat">
@@ -208,17 +225,102 @@
 
 <script>
     // چک می‌کنیم که آیا پیامی از سرور ارسال شده است
-    const msg = "{{ msg|escapejs }}";
-    if (msg) {
+    const msg = "{{ msg|escapejs }}".trim();  // حذف فاصله‌های اضافی
+    const buttonText = "{{ button_text|escapejs }}";
+    const iconType = "{{ icon_type|escapejs }}";
+
+    // بررسی خالی بودن یا برابر بودن با "none"
+    if (msg && msg.toLowerCase() !== "none") {
         Swal.fire({
             title: 'پیام',
             text: msg,
-            icon: 'info', // می‌توانید 'success' یا 'error' هم استفاده کنید
-            confirmButtonText: 'باشه'
+            icon: iconType,
+            confirmButtonText: buttonText
         });
     }
-</script>
-<script>
+
+
+    var map, marker, selectedLat, selectedLon;
+
+    // ایجاد آیکون مارکر سفارشی
+    var customIcon = L.icon({
+        {% load static %}
+        iconUrl: '{% static 'images/marker2.png'%}',
+        iconSize: [72, 72],  // تنظیم اندازه آیکون
+        iconAnchor: [32, 45]  // نقطه لنگر برای موقعیت‌دهی مناسب
+    });
+
+    function initMap() {
+        map = new L.Map('map', {
+            key: 'web.640eeefb0692499b8bc6b6d73c4d86ef',
+            maptype: 'standard-night',
+            poi: true,
+            traffic: false,
+            center: [34.6416, 50.8759],
+            zoom: 12
+        });
+
+        // بررسی وجود مختصات در sessionStorage و تنظیم ورودی‌ها
+        const savedLat = sessionStorage.getItem('lat');
+        const savedLon = sessionStorage.getItem('lon');
+        if (savedLat && savedLon) {
+            const latlng = [parseFloat(savedLat), parseFloat(savedLon)];
+            marker = L.marker(latlng, {icon: customIcon}).addTo(map);  // استفاده از آیکون سفارشی
+            map.setView(latlng, 12);
+            document.getElementById('lat').value = savedLat;
+            document.getElementById('lon').value = savedLon;
+        }
+
+        // تنظیم مارکر با دوبار کلیک روی نقشه
+        map.on('dblclick', function (e) {
+            const latlng = e.latlng;
+            selectedLat = latlng.lat;
+            selectedLon = latlng.lng;
+            document.getElementById('lat').value = selectedLat;
+            document.getElementById('lon').value = selectedLon;
+
+            // ذخیره مختصات در sessionStorage
+            sessionStorage.setItem('lat', selectedLat);
+            sessionStorage.setItem('lon', selectedLon);
+
+            // اضافه کردن یا جابجایی مارکر با آیکون سفارشی
+            if (marker) {
+                marker.setLatLng(latlng);
+            } else {
+                marker = L.marker(latlng, {icon: customIcon}).addTo(map);
+            }
+        });
+    }
+
+    // بررسی و تنظیم مختصات قبل از ارسال فرم
+    function validateForm() {
+        if (!document.getElementById('lat').value || !document.getElementById('lon').value) {
+            const savedLat = sessionStorage.getItem('lat');
+            const savedLon = sessionStorage.getItem('lon');
+            if (savedLat && savedLon) {
+                document.getElementById('lat').value = savedLat;
+                document.getElementById('lon').value = savedLon;
+            } else {
+                alert('لطفا یک موقعیت روی نقشه انتخاب کنید.');
+                return false;  // جلوگیری از ارسال فرم
+            }
+        }
+        return true;  // ادامه ارسال فرم در صورت صحیح بودن
+    }
+
+    setTimeout(function () {        // فرض کنید بارگذاری نقشه موفقیت‌آمیز بود
+        if (map) {
+            document.getElementById('loading-video').style.display = 'none'; // مخفی کردن ویدیو
+            document.getElementById('map').style.display = 'block'; // نمایش نقشه        } else {
+            document.getElementById('loading-video').style.display = 'none'; // مخفی کردن ویدیو            alert('لطفا اینترنت خود را چک کنید.'); // نمایش پیغام هشدار
+        }
+    }, 3500);
+
+
+    window.onload = function () {
+        initMap();
+    };
+
 
     document.addEventListener("DOMContentLoaded", function () {
         const products = document.querySelectorAll(".product");
@@ -244,57 +346,6 @@
         });
     });
 
-    var map;
-    var marker;
-    var selectedLat, selectedLon;
-
-    var map;
-    var marker;
-    var selectedLat, selectedLon;
-
-    function initMap() {
-        map = new L.Map('map', {
-            key: 'web.640eeefb0692499b8bc6b6d73c4d86ef',  // کلید API خود را جایگزین کنید
-            maptype: 'standard-night', // تغییر به دارک مود
-            poi: true,
-            traffic: false,
-            center: [34.6416, 50.8759], // مرکز نقشه به شهر قم
-            zoom: 12
-        });
-        // بررسی وجود مختصات در sessionStorage
-        const savedLat = sessionStorage.getItem('lat');
-        const savedLon = sessionStorage.getItem('lon');
-        if (savedLat && savedLon) {
-            const latlng = [parseFloat(savedLat), parseFloat(savedLon)];
-            marker = L.marker(latlng).addTo(map);
-            map.setView(latlng, 12); // تنظیم نقشه روی مختصات ذخیره‌شده
-        }
-
-        // تنظیم مارکر با دوبار کلیک روی نقشه
-        map.on('dblclick', function (e) {
-            const latlng = e.latlng;
-            const selectedLat = latlng.lat;
-            const selectedLon = latlng.lng;
-
-            document.getElementById('lat').value = selectedLat;
-            document.getElementById('lon').value = selectedLon;
-
-            // ذخیره مختصات در sessionStorage
-            sessionStorage.setItem('lat', selectedLat);
-            sessionStorage.setItem('lon', selectedLon);
-
-            // اضافه کردن یا جابجایی مارکر
-            if (marker) {
-                marker.setLatLng(latlng);
-            } else {
-                marker = L.marker(latlng).addTo(map);
-            }
-        });
-    }
-
-    window.onload = function () {
-        initMap(); // بارگذاری نقشه
-    };
 
     function selectButton(button) {
         // Remove 'selected' class from all buttons

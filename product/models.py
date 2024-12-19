@@ -32,3 +32,4 @@ class Order(models.Model):
     lat = models.FloatField(null=True, blank=True)
     lon = models.FloatField(null=True, blank=True)
     quantity = models.IntegerField(null=True, blank=True)
+    farsi = models.CharField(max_length=100, null=True, blank=True)

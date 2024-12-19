@@ -90,15 +90,20 @@
 <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 <script>
     // چک می‌کنیم که آیا پیامی از سرور ارسال شده است
-    const msg = "{{ msg|escapejs }}";
-    if (msg) {
+  const msg = "{{ msg|escapejs }}".trim();  // حذف فاصله‌های اضافی
+    const buttonText = "{{ button_text|escapejs }}";
+    const iconType = "{{ icon_type|escapejs }}";
+
+    // بررسی خالی بودن یا برابر بودن با "none"
+    if (msg && msg.toLowerCase() !== "none") {
         Swal.fire({
             title: 'پیام',
             text: msg,
-            icon: 'info', // می‌توانید 'success' یا 'error' هم استفاده کنید
-            confirmButtonText: 'باشه'
+            icon: iconType,
+            confirmButtonText: buttonText
         });
     }
+
 </script>
 </body>
 </html>
